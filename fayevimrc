@@ -1,0 +1,78 @@
+let mapleader=','
+
+set hidden " https://vim.fandom.com/wiki/Vim_buffer_FAQ#hidden
+set noerrorbells
+set noswapfile
+set number
+set smartindent
+color delek
+
+"editing vimrc and profile mappins
+nnoremap ,en :edit! ~/.notes.md<cr>
+nnoremap ,ev :edit! ~/dotfiles/fayevimrc<cr>
+nnoremap ,ep :edit! ~/.profile<cr>
+"source mappings
+nnoremap ,sv :source ~/dotfiles/fayevimrc<cr>
+"save, quit, and both mappins
+nnoremap ,w  :w<cr>
+nnoremap ,x  :x<cr>
+nnoremap ,q  :q!<cr>
+"nnoremap <c-w> bdw
+"save and run mapping
+nnoremap gp  :w<CR>:!python %<CR>
+"buffers and browsing mappings
+nnoremap ,3  <C-^>
+nnoremap ,b  :buffers<cr>:buffer<space>
+nnoremap ,o  :browse oldfiles<cr>
+
+"insert mode mappings
+inoremap  ( ()<left>
+inoremap  " ""<left>
+inoremap  ' ''<left>
+inoremap  [ []<left>
+inoremap  { {}<left>
+inoremap  FF False
+inoremap  TT True
+inoremap  `' '
+inoremap  `" "
+inoremap  `( (
+
+" diable hjkl and arrows keys
+nnoremap h <nop>
+nnoremap j <pagedown>
+nnoremap k <pageup>
+nnoremap l <nop>
+nnoremap <Up> <nop>
+nnoremap <Down> <nop>
+nnoremap <Left> <nop>
+nnoremap <Right> <nop>
+inoremap <Up> <nop>
+inoremap <Down> <nop>
+inoremap <Left> <nop>
+inoremap <Right> <nop>
+
+" type :PlugInstall to install plugins
+source ~/dotfiles/plug.vim
+call plug#begin('~/dotfiles/plugged')
+	Plug 'scrooloose/nerdcommenter'
+	Plug 'easymotion/vim-easymotion'
+	Plug 'valloric/youcompleteme'
+	Plug 'scrooloose/syntastic'
+	Plug 'tpope/vim-surround'
+	Plug 'michaeljsmith/vim-indent-object'
+	Plug 'tpope/vim-repeat'
+	Plug 'vim-airline/vim-airline'
+	Plug 'nanotech/jellybeans.vim'
+	Plug 'vim-airline/vim-airline'
+call plug#end()
+
+map       <Space>         <Plug>(easymotion-overwin-f)
+
+" replaces words with new
+nnoremap   ,r           :%s/\<<C-r><C-w>\>//g<Left><Left>
+vnoremap   ,r           :%s/\<<C-r><C-w>\>//g<Left><Left>
+
+" plays @q macro on visually selected lines : https://stackoverflow.com/questions/3337926/vim-macro-on-every-line-of-visual-selection
+vnoremap   q            :normal @q<cr>
+
+autocmd! bufwritepost fayevimrc source ~/dotfiles/fayevimrc

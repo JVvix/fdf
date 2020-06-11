@@ -5,14 +5,14 @@ set noerrorbells
 set noswapfile
 set number
 set smartindent
-color delek
 
 "editing vimrc and profile mappins
 nnoremap ,en :edit! ~/.notes.md<cr>
-nnoremap ,ev :edit! ~/dotfiles/fayevimrc<cr>
+nnoremap ,ef :edit! ~/fdf/fayevimrc<cr>
 nnoremap ,ep :edit! ~/.profile<cr>
 "source mappings
-nnoremap ,sv :source ~/dotfiles/fayevimrc<cr>
+nnoremap ,sf :source ~/fdf/fayevimrc<cr>
+nnoremap ,s% :source %<cr>
 "save, quit, and both mappins
 nnoremap ,w  :w<cr>
 nnoremap ,x  :x<cr>
@@ -20,6 +20,7 @@ nnoremap ,q  :q!<cr>
 "nnoremap <c-w> bdw
 "save and run mapping
 nnoremap gp  :w<CR>:!python %<CR>
+nnoremap ,cp :w<CR> :!cmd /c %<CR>
 "buffers and browsing mappings
 nnoremap ,3  <C-^>
 nnoremap ,b  :buffers<cr>:buffer<space>
@@ -36,20 +37,6 @@ inoremap  TT True
 inoremap  `' '
 inoremap  `" "
 inoremap  `( (
-
-" diable hjkl and arrows keys
-nnoremap h <nop>
-nnoremap j <pagedown>
-nnoremap k <pageup>
-nnoremap l <nop>
-nnoremap <Up> <nop>
-nnoremap <Down> <nop>
-nnoremap <Left> <nop>
-nnoremap <Right> <nop>
-inoremap <Up> <nop>
-inoremap <Down> <nop>
-inoremap <Left> <nop>
-inoremap <Right> <nop>
 
 " type :PlugInstall to install plugins
 source ~/dotfiles/plug.vim
@@ -75,4 +62,4 @@ vnoremap   ,r           :%s/\<<C-r><C-w>\>//g<Left><Left>
 " plays @q macro on visually selected lines : https://stackoverflow.com/questions/3337926/vim-macro-on-every-line-of-visual-selection
 vnoremap   q            :normal @q<cr>
 
-autocmd! bufwritepost fayevimrc source ~/dotfiles/fayevimrc
+autocmd! bufwritepost fayevimrc source ~/fdf/fayevimrc

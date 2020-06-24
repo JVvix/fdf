@@ -39,7 +39,6 @@ inoremap  `" "
 inoremap  `( (
 
 " type :PlugInstall to install plugins
-source ~/dotfiles/plug.vim
 call plug#begin('~/dotfiles/plugged')
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'easymotion/vim-easymotion'

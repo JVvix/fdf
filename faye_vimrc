@@ -1,0 +1,4 @@
+" Faye's Vim Settings
+set number
+set smartindent
+nnoremap gp :w<cr> :!%<cr>

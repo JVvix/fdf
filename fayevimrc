@@ -26,6 +26,10 @@ nnoremap ,3  <C-^>
 nnoremap ,b  :buffers<cr>:buffer<space>
 nnoremap ,o  :browse oldfiles<cr>
 
+" remove ^M
+nnoremap gm   :%s/\r//<CR>
+
+
 "insert mode mappings
 inoremap  ( ()<left>
 inoremap  " ""<left>
@@ -37,6 +41,8 @@ inoremap  TT True
 inoremap  `' '
 inoremap  `" "
 inoremap  `( (
+inoremap  UU <left><C-o>gUiw<C-o>e<right>
+" te  ESTTEST aTEST 
 
 " type :PlugInstall to install plugins
 call plug#begin('~/dotfiles/plugged')

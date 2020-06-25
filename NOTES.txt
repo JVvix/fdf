@@ -1,0 +1,4 @@
+how to start ahk automatically.
+   press windowskey-r
+   enter shell:startup
+   copy, NOT move, (press ctrl while dragging) ahkStatup.bat to 'Startup' folder.

@@ -1,4 +1,4 @@
-"<M-h>l ~/df/vimrc - BEGIN
+"<M-h>l ~/fdf/vimrc - BEGIN
 " NOTE: Vim fold commands: zr - unfold / zm - fold
 
 " let/set {{{
@@ -69,16 +69,16 @@ nnoremap <leader>bp   :bprev!<cr>
 nnoremap <leader>bh   :bprev!<cr>
 nnoremap <leader>dw   diw
 nnoremap <leader>ec  :edit!   c:/<cr>
-nnoremap <leader>eb  :edit!   ~/df/ExecutorBuffer.java<cr>
-nnoremap <leader>ee  :edit!   ~/df/eQWERTY.ahk<cr>
-nnoremap <leader>eg  :edit!   ~/df/nvim/ginit.vim<cr>
-nnoremap <leader>ei  :edit!   ~/df/.gitignore<cr>
+nnoremap <leader>eb  :edit!   ~/fdf/ExecutorBuffer.java<cr>
+nnoremap <leader>ee  :edit!   ~/fdf/eQWERTY.ahk<cr>
+nnoremap <leader>eg  :edit!   ~/fdf/nvim/ginit.vim<cr>
+nnoremap <leader>ei  :edit!   ~/fdf/.gitignore<cr>
 nnoremap <leader>el  :edit!   c:/sandbox/MTR/Libraries<cr>
-nnoremap <leader>ep  :edit!   ~/df/profile.ps1<cr>
+nnoremap <leader>ep  :edit!   ~/fdf/profile.ps1<cr>
 nnoremap <leader>es  :edit!   ~/src/<cr>
-nnoremap <leader>et  :edit!   ~/df/tap.ahk<cr>
-nnoremap <leader>ev  :edit!   ~/df/vimrc<cr>
-nnoremap <leader>v   :edit!   ~/df/vimrc<cr>
+nnoremap <leader>et  :edit!   ~/fdf/tap.ahk<cr>
+nnoremap <leader>ev  :edit!   ~/fdf/vimrc<cr>
+nnoremap <leader>v   :edit!   ~/fdf/vimrc<cr>
 nnoremap <leader>ex  :exe getline(line('.'))<cr>
 nnoremap <leader>os  :silent ! cmd /c start  ..\AppData\Local\nvim-data\swap<cr>
 nnoremap <leader>of  :silent ! start %<cr>
@@ -87,16 +87,16 @@ nnoremap <leader>ft  :set ft=
 nnoremap <leader>h   :noh<cr>
 nnoremap <leader>j   :jumps<cr>
 nnoremap <leader>k   :48vs ergolaptop<cr>:set nonumber<cr><c-w>h
-nnoremap <leader>l   :source ~/df/nvim/session.vim<cr>
+nnoremap <leader>l   :source ~/fdf/nvim/session.vim<cr>
 nnoremap <leader>m   :marks<cr>
 nnoremap <leader>pi  :PlugInstall<cr>
 nnoremap <leader>q   :quit!<cr>
 nnoremap <leader>ef  :edit ~/fdf/fayevimrc<cr>
 nnoremap <leader>sf  :source ~/fdf/fayevimrc<cr>
 nnoremap <leader>st  vip:sort<cr>
-nnoremap <leader>sv  :source ~/df/vimrc<cr>
-nnoremap <leader>sg  :source ~/df/nvim/ginit.vim<cr>
-nnoremap <leader>ss  :w<cr>:source ~/df/vimrc<cr>:source ~/df/nvim/ginit.vim<cr>
+nnoremap <leader>sv  :source ~/fdf/vimrc<cr>
+nnoremap <leader>sg  :source ~/fdf/nvim/ginit.vim<cr>
+nnoremap <leader>ss  :w<cr>:source ~/fdf/vimrc<cr>:source ~/fdf/nvim/ginit.vim<cr>
 nnoremap <leader>t   :vsplit<cr>:set nonumber<cr>:terminal bash<cr>i
 nnoremap <leader>w   :w<cr>
 nnoremap <leader>z   :color zellner<cr>
@@ -153,7 +153,7 @@ nnoremap   gbh         :bprev!<cr>
 nnoremap   gbl         :bnext!<cr>
 nnoremap   gcl         :set cursorline!<cr>
 nnoremap   gdc         :edit ~/Documents<cr>
-nnoremap   gdf         :edit ~/df<cr>
+nnoremap   gdf         :edit ~/fdf<cr>
 nnoremap   gdl         :edit ~/Downloads<cr>
 nnoremap   ged         :call NavigateLeftHanded()<cr>
 nnoremap   gh          :noh<cr>
@@ -177,14 +177,14 @@ nnoremap   g.          :edit! .<cr>
 
 " copy and paste at local location
 " nnoremap     <leader>v       my:echo "highlight text, then press 'v' to paste at this location."<cr>
-vnoremap     v               y`YP
-vnoremap     yy              Y
+vnoremap   v            y`YP
+vnoremap   yy           Y
 
 " swap ; with :
-nnoremap   :               ;
-nnoremap   ;               :
-vnoremap   :               ;
-vnoremap   ;               :
+nnoremap   :            ;
+nnoremap   ;            :
+vnoremap   :            ;
+vnoremap   ;            :
 
 " A mappings
 nnoremap   A            <Nop>
@@ -202,7 +202,6 @@ nnoremap   dA           :%d_<CR>
 nnoremap   F            <Nop>
 nnoremap   FF	        :CtrlP<cr>
 nnoremap   FS	        :let g:full_screen=!g:full_screen <bar> call GuiWindowFullScreen(g:full_screen) <bar> echom "fullscreen toggled"<CR> 
-
 
 " G mappings
 nnoremap   G            <Nop>
@@ -695,7 +694,7 @@ nmap <leader>j :call GotoJump()<cr>
 autocmd BufEnter *.bsh :set filetype=java
 autocmd VimLeave * call SaveSess()
 autocmd BufEnter term://* startinsert
-autocmd FileType java set tags=~/df/tags.java
+autocmd FileType java set tags=~/fdf/tags.java
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 " autocmd VimEnter * call RestoreSess()
@@ -726,7 +725,7 @@ endif
 let hostname = substitute(system('hostname'), '\n', '', '')
 
 if hostname == "ASUS_DESKTOP"
-    source ~/df/nvim/shady.vim   " Light vim color theme
+    source ~/fdf/nvim/shady.vim   " Light vim color theme
     colorscheme edar
     hi ActiveWindow            guibg=black    ctermbg=white
     hi InactiveWindow          guibg=gray205  ctermbg=grey
@@ -736,7 +735,7 @@ endif
 
 if hostname == "CAR-LT-C50626B"  " Work Setup. configured to be in light mode, then inverted.
     let g:airline_theme='sol'    " Light mode
-    source ~/df/nvim/vadelma.vim   " Light vim color theme
+    source ~/fdf/nvim/vadelma.vim   " Light vim color theme
     hi MsgArea                 guibg=lightgray guifg=purple ctermbg=white 
     hi Keyword                 guibg=clear     guifg=Blue   ctermbg=white 
     hi Comment                 guibg=clear     guifg=Green  ctermbg=white 
@@ -761,9 +760,9 @@ if hostname == "CAR-LT-C50626B"  " Work Setup. configured to be in light mode, t
     " nnoremap <leader>ct  !%:p:h/nvim/session.vim//bin/ctags -V -f tags --language-force=java -R C:\sandbox\MTR\Libraries\*.bsh<cr>
     nnoremap <leader>ct  :silent !c:\Users\C50626\\bin\ctags -V -f tags --language-force=java -R C:\sandbox\MTR\Libraries\*.bsh<cr>
 
-    source ~/df/nvim/plug.vim    " call directly instead of using "autoload" directory
+    source ~/fdf/nvim/plug.vim    " call directly instead of using "autoload" directory
     echo "759 Plug.vim: loading for host " . hostname
-    call plug#begin('~/df/nvim/plugged')
+    call plug#begin('~/fdf/nvim/plugged')
         Plug 'bling/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
         Plug 'easymotion/vim-easymotion'
@@ -816,9 +815,9 @@ if hostname == "rvl-pv-ply-ub1804vm"  " VM at Microchip
     hi InactiveWindow          ctermbg=252
     " map      <Space>     <Plug>(easymotion-bd-f)
     " nnoremap <leader>ss  :w<cr>:source ~//vimrc<cr>
-    source ~/df/nvim/plug.vim    " call directly instead of using "autoload" directory
+    source ~/fdf/nvim/plug.vim    " call directly instead of using "autoload" directory
     echo "814 Plug.vim: loading for host " . hostname
-    call plug#begin('~/df/nvim/plugged')
+    call plug#begin('~/fdf/nvim/plugged')
         Plug 'bling/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
         Plug 'easymotion/vim-easymotion'
@@ -849,10 +848,10 @@ if hostname == "rvl-pv-vault"  " log server at MC
     hi ErrorMsg                cterm=bold       ctermfg=red   ctermbg=grey
     hi Folded                  ctermfg=black    ctermbg=7        
     hi InactiveWindow          ctermbg=252
-    nnoremap <leader>ev  :edit!   /nvm/users/ply/df/vimrc<cr>
-    source /nvm/users/ply/df/nvim/plug.vim    " call directly instead of using "autoload" directory
+    nnoremap <leader>ev  :edit!   /nvm/users/ply/fdf/vimrc<cr>
+    source /nvm/users/ply/fdf/nvim/plug.vim    " call directly instead of using "autoload" directory
     echo "848 Plug.vim: loading for host " . hostname
-    call plug#begin('/nvm/users/ply/df/nvim/plugged')
+    call plug#begin('/nvm/users/ply/fdf/nvim/plugged')
         Plug 'bling/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
         Plug 'easymotion/vim-easymotion'
@@ -884,9 +883,9 @@ if hostname == "TC"  " text gateway
     hi Folded                  ctermfg=black    ctermbg=7        
     hi InactiveWindow          ctermbg=252
     map      <Space>     <Plug>(easymotion-bd-f)
-    source ~/df/nvim/plug.vim    " call directly instead of using "autoload" directory
+    source ~/fdf/nvim/plug.vim    " call directly instead of using "autoload" directory
     echo "Plug.vim: loading for host " . hostname
-    call plug#begin('~/df/nvim/plugged')
+    call plug#begin('~/fdf/nvim/plugged')
         Plug 'bling/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
         Plug 'easymotion/vim-easymotion'
@@ -908,7 +907,7 @@ if hostname == "TC"  " text gateway
 endif
 
 if hostname == "SurfacePro"
-    source ~/df/nvim/hyper.vim
+    source ~/fdf/nvim/hyper.vim
     " colorscheme edar
     hi ActiveWindow            guibg=black    ctermbg=white
     hi InactiveWindow          guibg=gray205  ctermbg=grey
@@ -921,9 +920,9 @@ endif
 
 " Plug.vim {{{
 if !exists('g:loaded_plug')  " Only load if it hasn't been loaded.
-    source ~/df/nvim/plug.vim    " call directly instead of using "autoload" directory
+    source ~/fdf/nvim/plug.vim    " call directly instead of using "autoload" directory
     echo "919 Plug.vim: loading for host " . hostname
-    call plug#begin('~/df/nvim/plugged')
+    call plug#begin('~/fdf/nvim/plugged')
         Plug 'bling/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
         Plug 'easymotion/vim-easymotion'
@@ -1053,5 +1052,4 @@ nnoremap <silent> gs  :silent !start /max c:\\Progra~1\\Git\\git-bash.exe<cr>
 " paranthasess 1st 2nd 3rd 
 " This is a line of text. A second text line. Make this the third sentence. 
 " http://news.com
-" very1 very2 very3 very2 very3 very3  very3 very2 very2 vertical vertical
-" ~/df/vimrc - END
+" ~/fdf/vimrc - END

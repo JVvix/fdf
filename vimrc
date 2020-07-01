@@ -24,6 +24,7 @@ let g:superJK_scroll = "1"      " top is default is 25
 let g:screen_offset = 1.0/4.0 " 25%
 " let g:screen_offset = 0
 
+set autochdir  " auto change directory to current file
 set cindent
 set cursorline
 set foldmethod=marker   " zm/zr - fold/unfold
@@ -921,7 +922,7 @@ endif
 " Plug.vim {{{
 if !exists('g:loaded_plug')  " Only load if it hasn't been loaded.
     source ~/fdf/nvim/plug.vim    " call directly instead of using "autoload" directory
-    echo "919 Plug.vim: loading for host " . hostname
+    "echo "919 Plug.vim: loading for host " . hostname
     call plug#begin('~/fdf/nvim/plugged')
         Plug 'bling/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
@@ -1040,6 +1041,10 @@ imap <C-l> <Plug>(coc-snippets-expand)
 nnoremap <silent> gly :silent !start bin\\kitty_portable -ssh root@ly95843.ddns.net<cr>
 nnoremap <silent> gv  :silent !start bin\\kitty_portable -ssh root@rvl-pv-ply-ub1804vm.rvl.mscc.lab<cr>
 nnoremap <silent> gs  :silent !start /max c:\\Progra~1\\Git\\git-bash.exe<cr>
+nnoremap  gq      q
+nnoremap ,of          :%s//'/g
+nnoremap ,oc          :r !python \%userprofile\%\\df\\ocr.py<CR>:%s//'/g<CR>
+
 
 "Gstatus
 

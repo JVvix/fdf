@@ -634,6 +634,7 @@ SetTitleMatchMode, 2
     1 & l::Send ^{WheelDown} 
     1 & \;::Send ^{WheelUp} 
     1 & '::Send !{Space}f
+    lalt & r::Send ^bq
 #IfWinActive
 
 #IfWinActive, ahk_exe nvim-qt.exe

@@ -88,7 +88,7 @@ nnoremap <leader>ft  :set ft=
 nnoremap <leader>h   :noh<cr>
 nnoremap <leader>j   :jumps<cr>
 nnoremap <leader>k   :48vs ergolaptop<cr>:set nonumber<cr><c-w>h
-nnoremap <leader>l   :source ~/fdf/nvim/session.vim<cr>
+nnoremap <leader>l   :source ~/df/nvim/session.vim<cr>
 nnoremap <leader>m   :marks<cr>
 nnoremap <leader>pi  :PlugInstall<cr>
 nnoremap <leader>q   :quit!<cr>
@@ -256,6 +256,13 @@ nnoremap   sL 	        :vertical resize +5<cr>
 nnoremap   sN           :new<cr>
 nnoremap   sS           :split<cr>
 nnoremap   sb           ?
+nnoremap   sdg          :diffget<CR>
+vnoremap   sdg          :diffget<CR>
+nnoremap   sdk          [czz
+nnoremap   sdj          ]czz
+nnoremap   sdp          :diffput<CR>
+vnoremap   sdp          :diffput<CR>
+nnoremap   sdu          :diffupdate<CR>
 nnoremap   sf           /
 nnoremap   sh           <C-w>h
 nnoremap   sj           <C-w>j
@@ -264,8 +271,9 @@ nnoremap   sl           <C-w>l
 nnoremap   sn           :vnew<cr>
 nnoremap   sq           :call QuitIfNotLastWindow()<cr>
 nnoremap   ss           :vsplit<cr>
-nnoremap   sv           :new<cr>
 nnoremap   sr           :%s/\<<C-r><C-w>\>/<C-r><C-w>/g<Left><Left>
+nnoremap   svn          :new<cr>
+nnoremap   svd          :vertical diffsplit<Space>
 nnoremap   sw           *
 nnoremap   sz           :ZoomToggle<cr>
  
@@ -884,9 +892,9 @@ if hostname == "TC"  " text gateway
     hi Folded                  ctermfg=black    ctermbg=7        
     hi InactiveWindow          ctermbg=252
     map      <Space>     <Plug>(easymotion-bd-f)
-    source ~/fdf/nvim/plug.vim    " call directly instead of using "autoload" directory
+    source ~/df/nvim/plug.vim    " call directly instead of using "autoload" directory
     echo "Plug.vim: loading for host " . hostname
-    call plug#begin('~/fdf/nvim/plugged')
+    call plug#begin('~/df/nvim/plugged')
         Plug 'bling/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
         Plug 'easymotion/vim-easymotion'
@@ -987,8 +995,8 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
 let g:deoplete#enable_at_startup = 1
-hi HighlightedyankRegion cterm=reverse gui=reverse
-map          <Space><Space>         <Plug>(easymotion-overwin-f)
+hi  HighlightedyankRegion cterm=reverse gui=reverse
+map          <Space><Space>  <Plug>(easymotion-bd-f)
 nnoremap     <Space>C        :let g:screen_offset=!g:screen_offset<CR>:echo "g:screen_offset: " . string(g:screen_offset)<CR>
 nnoremap     <Space>ZZ       :Goyo <bar> Goyo 100%x100% <bar> let g:zen_mode=!g:zen_mode <bar> call GuiWindowFullScreen(1) <bar> echom "g:zen_mode: " . g:zen_mode<CR>
 nnoremap     <Space>ZX       :Goyo <bar> echom "g:zen_mode: " . g:zen_mode<CR>
@@ -998,10 +1006,10 @@ nnoremap     <Space>N        :set nonumber!<CR>
 nnoremap     <Space>S        :let g:smooth_scroll=!g:smooth_scroll<CR>:echo "g:smooth_scroll: " . g:smooth_scroll<CR>
 nnoremap     <Space>W        :set nowrap!<CR>
 
-map          <Space>         <Plug>(easymotion-overwin-f2)
+map          <Space>         <Plug>(easymotion-bd-f2)
 map          <BS>            :<Up><Cr>
 
-map          vai         vaI
+map          vai             vaI
 
 " nnoremap <silent> <C-f> :call comfortable_motion#flick(200)<cr>
 " nnoremap <silent> <C-b> :call comfortable_motion#flick(-200)<cr>
@@ -1043,7 +1051,7 @@ nnoremap <silent> gv  :silent !start bin\\kitty_portable -ssh root@rvl-pv-ply-ub
 nnoremap <silent> gs  :silent !start /max c:\\Progra~1\\Git\\git-bash.exe<cr>
 nnoremap  gq      q
 nnoremap ,of          :%s//'/g
-nnoremap ,oc          :r !python \%userprofile\%\\df\\ocr.py<CR>:%s//'/g<CR>
+nnoremap ,oc          :r !python \%userprofile\%\\fdf\\ocr.py<CR>:%s//'/g<CR>
 
 
 "Gstatus

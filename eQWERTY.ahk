@@ -288,88 +288,88 @@ Backspace & f::MouseMove,  25,  0,   0, R
 Backspace & Space::MouseClick Right
 
 ; Left Pinky Shift
-3 & RALT::SendRaw 0
-3 & RCTRL::SendRaw .
-3 & RSHIFT::Enter
-3 & m::SendRaw 0
-3 & ,::SendRaw 1
-3 & .::SendRaw 2
-3 & /::SendRaw 3
-3 & k::SendRaw 4
-3 & l::SendRaw 5
-3 & \;::SendRaw 6
-3 & i::SendRaw 7
-3 & o::SendRaw 8
-3 & p::SendRaw 9
-3 & 9::SendRaw /
-3 & 0::SendRaw *
-3 & -::SendRaw -
-3 & j::SendRaw +
-3 & '::SendRaw +
-3 & [::SendRaw -
-3 & ]::=
-3 & u::SendRaw -
-3 & y::SendRaw *
-3 & c::SendRaw rvl-pv-connvm06
-3 & r::SendRaw rvl-pv-nvm
-3 & w::SendRaw Wevalid8
-$3::3
-
-;4 & RALT::MSGbox 4 & alt
-4 & o::
-    MMcount := MMcount / 2
-    Return
-4 & p::
-    MMcount := MMcount * 2 
-    Return
-4 & l::MouseMove,    0, -200, 0, R
-4 & k::MouseMove,    0,  200, 0, R
-4 & j::MouseMove, -200, 0,   0, R
-4 & \;::MouseMove, 200,  0,   0, R
-4 & /::MouseMove,  -20, 0, 0, R
-4 & ,::MouseMove,    0, 20, 0, R
-4 & m::MouseMove, -20, 0,   0, R    ; Left
-4 & .::MouseMove,  20, 0,   0, R
-4 & RALT::MouseClick
-4 & END::MouseClick, right
-4 & RCTRL::MouseClick, right
-$4::4
-
-5 & l::MouseMove,    0, -20 , 0, R
-5 & k::MouseMove,    0,  20,  0, R
-5 & j::MouseMove,  -20,  0,   0, R
-5 & RALT::MouseClick
-5 & \;::MouseMove,   20,  0,   0, R
-5 & END::MouseClick, right
-5 & RCTRL::MouseClick, right
-$5::5  
-
-0 & q::SendRaw ^
-0 & w::SendRaw &
-0 & e::SendRaw *
-0 & r::SendRaw (
-0 & t::SendRaw )
-0 & a::SendRaw !
-0 & s::SendRaw @
-0 & d::SendRaw #
-0 & f::SendRaw $
-0 & c::SendRaw _
-
-- & d::
-    loop 4 {
-        Send {WheelDown} 
-        sleep 125
-    }
-    Return
-- & e::
-    loop 4 {
-        Send {WheelUp}
-        sleep 125
-    }
-    Return
-#IF
-; }}} OldStuff
-
+;3 & RALT::SendRaw 0
+;3 & RCTRL::SendRaw .
+;3 & RSHIFT::Enter
+;3 & m::SendRaw 0
+;3 & ,::SendRaw 1
+;3 & .::SendRaw 2
+;3 & /::SendRaw 3
+;3 & k::SendRaw 4
+;3 & l::SendRaw 5
+;3 & \;::SendRaw 6
+;3 & i::SendRaw 7
+;3 & o::SendRaw 8
+;3 & p::SendRaw 9
+;3 & 9::SendRaw /
+;3 & 0::SendRaw *
+;3 & -::SendRaw -
+;3 & j::SendRaw +
+;3 & '::SendRaw +
+;3 & [::SendRaw -
+;3 & ]::=
+;3 & u::SendRaw -
+;3 & y::SendRaw *
+;3 & c::SendRaw rvl-pv-connvm06
+;3 & r::SendRaw rvl-pv-nvm
+;3 & w::SendRaw Wevalid8
+;$3::3
+;
+;;4 & RALT::MSGbox 4 & alt
+;4 & o::
+;    MMcount := MMcount / 2
+;    Return
+;4 & p::
+;    MMcount := MMcount * 2 
+;    Return
+;4 & l::MouseMove,    0, -200, 0, R
+;4 & k::MouseMove,    0,  200, 0, R
+;4 & j::MouseMove, -200, 0,   0, R
+;4 & \;::MouseMove, 200,  0,   0, R
+;4 & /::MouseMove,  -20, 0, 0, R
+;4 & ,::MouseMove,    0, 20, 0, R
+;4 & m::MouseMove, -20, 0,   0, R    ; Left
+;4 & .::MouseMove,  20, 0,   0, R
+;4 & RALT::MouseClick
+;4 & END::MouseClick, right
+;4 & RCTRL::MouseClick, right
+;$4::4
+;
+;5 & l::MouseMove,    0, -20 , 0, R
+;5 & k::MouseMove,    0,  20,  0, R
+;5 & j::MouseMove,  -20,  0,   0, R
+;5 & RALT::MouseClick
+;5 & \;::MouseMove,   20,  0,   0, R
+;5 & END::MouseClick, right
+;5 & RCTRL::MouseClick, right
+;$5::5  
+;
+;0 & q::SendRaw ^
+;0 & w::SendRaw &
+;0 & e::SendRaw *
+;0 & r::SendRaw (
+;0 & t::SendRaw )
+;0 & a::SendRaw !
+;0 & s::SendRaw @
+;0 & d::SendRaw #
+;0 & f::SendRaw $
+;0 & c::SendRaw _
+;
+;- & d::
+;    loop 4 {
+;        Send {WheelDown} 
+;        sleep 125
+;    }
+;    Return
+;- & e::
+;    loop 4 {
+;        Send {WheelUp}
+;        sleep 125
+;    }
+;    Return
+;#IF
+;; }}} OldStuff
+;
 #IF ShiftOuter ;{{{ #IF ShiftOuter
 
     ;Escape::MsgBox Escape is left Alt (left of Spacebar)
@@ -523,7 +523,8 @@ $5::5
     - & 3::Send !{F4}
     = & e::
     y & r::
-       msgbox reload
+    Esc::
+       msgbox eQWERTY.ahk will reload
        reload
        return
     y & s::
@@ -534,6 +535,10 @@ $5::5
     ` & l::send #{Down}
     ` & k::send #{Left}
     ` & '::send #{Right}
+    Del::
+        Suspend ;  very first line
+        ToolTip % A_IsSuspended ? "eQWERTY Suspended" : "", 10, 10
+        Return
 
 ;    lwin & backspace::sendraw +
     lwin::Send {Tab}
@@ -646,6 +651,8 @@ SetTitleMatchMode, 2
     lalt & [::send ^o
     1 & l::Send ^-
     1 & \;::Send ^{+}
+    ;ralt & [::Send #+s
+    ralt & o::Send #+s
 #IfWinActive
 
 #IfWinActive, ahk_exe chrome.exe
@@ -660,6 +667,13 @@ SetTitleMatchMode, 2
     -    & s::Send +!d   ; chrome Dark Reader mode toggle (- & d)
 #IfWinActive
 
+#IfWinActive, ahk_exe powershell.exe
+    ; increase/decrease font/fullscreen
+    1 & l::Send ^{WheelDown} 
+    1 & \;::Send ^{WheelUp} 
+    1 & '::Send !{Enter}
+#IfWinActive
+
 ; C:\Program Files\Git\usr\bin\mintty.exe
 #IfWinActive, ahk_exe mintty.exe
     1 & l::Send ^-
@@ -667,278 +681,278 @@ SetTitleMatchMode, 2
 #IfWinActive
 
 ;{{{ #IF shiftRight1
-#IF shiftRight1
-    l::k
-    i::u
-    o::i
-    p::o
-    [::p
-    ]::[
-    \::]
-    u::y
-    k::j
-    \;::l
-    '::;
-    j::h
-    h::Backspace
-    m::n
-    ;]::m
-    ,::m
-    .::,
-    /::.
-    y::Tab
-    n::Enter
-    7::6
-    8::7
-    9::8
-    0::9
-    -::0
-    =::-
-    Backspace::=
-
-    RALT & j::Send {Left}
-    RALT & k::Send {Down}
-    RALT & l::Send {Up}
-    RALT & \;::Send {Right}
-    RALT & o::Send {PgDn}
-    RALT & p::Send {PgUp}
-    RALT & m::Send {Home} 
-    RALT & ,::Send ^{Left}
-    RALT & .::Send ^{Right}
-    RALT & ?::Send {End}
-    ;RALT & m::Send ^n
-    RALT::Return
-
-    LALT & RALT::Send ^{BackSpace}
-    ;RCTRL & Space::Send ^{Backspace}
-    RALT & LALT::Send ^{Backspace}
-    RALT & Tab::Send #{Tab}
-    ;RALT & Space::Send {BackSpace}
-    RALT & Space::Send {BackSpace}
-    LALT::Send {Enter}
-    ; RALT & Space::Send {BackSpace}
-    ; RALT & Space::AltTab
-    LALT & Tab::AltTab
-    ; RALT & LALT::ShiftAltTab
-    RCTRL & Up::AltTab
-    RCTRL & Down::ShiftAltTab
-    ; RALT & RCTRL::ShiftAltTab
-    ;RALT & CapsLock::AltTab
-    ;RALT & LShift::ShiftAltTab
-    ;LALT & w::Send ^w
-
-    RALT & 3::RunOrActivate(mstscPath, "con103")
-    RALT & [::RunOrActivate(kittyPath)
-    RALT & b::SendRaw \\
-    ;RALT & q::SendRaw '
-    RALT & t::Send {Tab}
-    RALT & e::Send {Escape}
-    ;RALT & f::Send {Enter}
-    RALT & s::RunOrActivate(nvimqtPath)
-    RALT & v::SendRaw |
-    RALT & w::SendRaw "
-    RALT & x::SendRaw ?
-    RALT & z::SendRaw /
-    RALT & `::RunOrActivate(nvimPath)
-    RALT & g::
-        altR := vimfmPath
-        RunOrActivate(vifmPath)
-        Return
-    RALT & c::RunOrActivate(chromePath) 
-    RALT & a::RunOrActivate(vsCodePath)
-    End::Ctrl
-    AppsKey::RCTRL
-    AppsKey & \;::Send ^l
-    AppsKey & a::Send ^a
-    AppsKey & c::Send ^c
-    AppsKey & d::Send #d
-    AppsKey & f::Run, %hapPath%
-    AppsKey & r::Send ^r
-    AppsKey & s::Send ^s
-    AppsKey & w::Send ^w
-    AppsKey & 4::Send !{F4}
-    ;AppsKey & Space::Send ^{Backspace}
-    RCTRL   & Space::Send ^{Backspace}
-
-    RWIN & \;::Send ^L
-    RWIN & `::Send ^`
-    RWIN & 1::Send ^1
-    RWIN & 2::Send ^2
-    RWIN & 3::Send ^3
-    RWIN & 4::Send ^4
-    RWIN & 5::Send ^5
-    RWIN & 6::Send ^6
-    RWIN & 7::Send ^7
-    RWIN & 8::Send ^8
-    RWIN & 9::Send ^9
-    RWIN & c::Send ^c
-    RWIN & d::Send ^d
-    RWIN & r::Send ^r
-    RWIN & s::Send ^s
-    RWIN & t::Send ^t
-    RWIN & u::Send ^u
-    RWIN & v::Send ^v
-    RWIN & w::Send ^w
-    ; LWIN & z::run Shutdown /s /t 0
-    ; LWIN & q::run Shutdown /r /t 0
-
-    0 & q::SendRaw ^
-    0 & w::SendRaw &
-    0 & e::SendRaw *
-    0 & r::SendRaw (
-    0 & t::SendRaw )
-    0 & a::SendRaw !
-    0 & s::SendRaw @
-    0 & d::SendRaw #
-    0 & f::SendRaw $
-    0 & c::SendRaw _
-
-    ; Left Mid Finger Shift
-    3 & RALT::SendRaw 0
-    3 & RCTRL::SendRaw .
-    3 & RSHIFT::Enter
-    3 & m::SendRaw 0
-    3 & ,::SendRaw 1
-    3 & .::SendRaw 2
-    3 & /::SendRaw 3
-    3 & k::SendRaw 4
-    3 & l::SendRaw 5
-    3 & \;::SendRaw 6
-    3 & i::SendRaw 7
-    3 & o::SendRaw 8
-    3 & p::SendRaw 9
-    3 & 9::SendRaw /
-    3 & 0::SendRaw *
-    3 & -::SendRaw -
-    3 & j::SendRaw +
-    3 & '::SendRaw +
-    3 & [::SendRaw -
-    3 & ]::=
-    3 & u::SendRaw -
-    3 & y::SendRaw *
-    3 & c::SendRaw rvl-pv-connvm06
-    3 & r::SendRaw rvl-pv-nvm
-    3 & w::SendRaw Wevalid8
-    $3::3
-
-    #IF kShift
-        ;k & Space::SendRaw j
-        ;k & Space::Send {Backspace}
-        k & Space::Send {Escape}
-        k & 1::SendRaw !
-        k & 2::SendRaw @
-        k & 3::SendRaw #
-        k & 4::SendRaw $
-        k & 5::SendRaw \%
-        k & 6::SendRaw ^
-        k & q::SendRaw Q
-        k & w::SendRaw W
-        k & e::SendRaw E
-        k & r::SendRaw R
-        k & t::SendRaw T
-        k & a::SendRaw A
-        k & s::SendRaw S
-        k & d::SendRaw D
-        k & f::SendRaw F
-        k & g::SendRaw G
-        k & z::SendRaw Z
-        k & x::SendRaw X
-        k & c::SendRaw C
-        k & v::SendRaw V
-        k & b::SendRaw B
-        k & `::SendRaw ~
-    #IF
-;}}}
-
-    $f::f
-    f & 6::Return
-    f & 7::SendRaw ^
-    f & 8::SendRaw &
-    f & 9::SendRaw *
-    f & 0::SendRaw (
-    f & -::SendRaw )
-    f & =::SendRaw _
-    f & Backspace::SendRaw +
-    f & l::SendRaw K
-    f & i::SendRaw U
-    f & o::SendRaw I
-    f & p::SendRaw O
-    f & [::SendRaw P
-    f & ]::SendRaw {
-    f & \::SendRaw }
-    f & u::SendRaw Y
-    f & j::SendRaw H
-    f & k::SendRaw J
-    f & \;::SendRaw L
-    f & '::SendRaw :
-    f & m::SendRaw N
-    f & ,::SendRaw M
-    f & .::SendRaw <
-    f & /::SendRaw >
-    f & RALT::Send {Enter}
-    ;f & RALT::Send ^{BackSpace}
-    ;f & RALT::Send {Backspace}
-    ;f & Space::Send {Escape}
-    ;RALT & e::Send {Escape}
-
-    ; MEDIA KEYS
-    ;2 & k::Send {Volume_Down}{Volume_Down}{Volume_Down}{Volume_Down}{Volume_Down}
-    2 & l::Send {Volume_Up}{Volume_Up}{Volume_Up}{Volume_Up}{Volume_Up}
-    RShift & Down::Send  {Volume_Down}{Volume_Down}{Volume_Down}{Volume_Down}{Volume_Down}
-    RShift & Up::Send {Volume_Up}{Volume_Up}{Volume_Up}{Volume_Up}{Volume_Up}
-    2 & j::Send {Media_Prev}
-    2 & \;::Send {Media_Next}
-    2 & [::Send {Media_Play_Pause} 
-    2 & ,::Send {Volume_Mute} 
-    2 & o::BS.SetBrightness(15)
-    2 & i::BS.SetBrightness(-15)
-    ;2 & p::Send {LWin Down}{Ctrl Down}c{Ctrl Up}{LWin Up}  ; toggle Wintools invert
-    Enter & p::Send {LWin Down}{Ctrl Down}c{Ctrl Up}{LWin Up}  ; toggle Wintools invert
-    2 & u::Send {Shift Down}{F11}{Shift Up}                ; toggle Chrome Deliminate plugin
-    2 & ]::Send {Shift Down}{Ctrl Down}{F12}{Shift Up}{Ctrl Up}   ; Chrome Deliminate plugin
-    2 & RALT::RunOrActivate("explorer.exe")
-    $2::2 
-
-#IF
-; }}} shiftRight1
-
-; {{{ #IF shiftRightHand2
-#IF shiftRightHand2
-    \;::k
-    l::j
-    i::y
-    o::u
-    p::i
-    '::l
-    [::o
-
-    ]::p
-    \::[
-    u::y
-    k::h
-
-   ; \;::l
-    Enter::;
-    j::h
-    h::Backspace
-    m::n
-    ;]::m
-    ,::n
-    .::m
-    /::,
-    Rshift::.
-    y::Tab
-    n::Enter
-    7::6
-    8::7
-    9::8
-    0::9
-    -::0
-    =::-
-    Backspace::=
-    RALT::AppsKey
-    AppsKey & Space::Send {BackSpace}
-#IF
+;#IF shiftRight1
+;    l::k
+;    i::u
+;    o::i
+;    p::o
+;    [::p
+;    ]::[
+;    \::]
+;    u::y
+;    k::j
+;    \;::l
+;    '::;
+;    j::h
+;    h::Backspace
+;    m::n
+;    ;]::m
+;    ,::m
+;    .::,
+;    /::.
+;    y::Tab
+;    n::Enter
+;    7::6
+;    8::7
+;    9::8
+;    0::9
+;    -::0
+;    =::-
+;    Backspace::=
+;
+;    RALT & j::Send {Left}
+;    RALT & k::Send {Down}
+;    RALT & l::Send {Up}
+;    RALT & \;::Send {Right}
+;    RALT & o::Send {PgDn}
+;    RALT & p::Send {PgUp}
+;    RALT & m::Send {Home} 
+;    RALT & ,::Send ^{Left}
+;    RALT & .::Send ^{Right}
+;    RALT & ?::Send {End}
+;    ;RALT & m::Send ^n
+;    RALT::Return
+;
+;    LALT & RALT::Send ^{BackSpace}
+;    ;RCTRL & Space::Send ^{Backspace}
+;    RALT & LALT::Send ^{Backspace}
+;    RALT & Tab::Send #{Tab}
+;    ;RALT & Space::Send {BackSpace}
+;    RALT & Space::Send {BackSpace}
+;    LALT::Send {Enter}
+;    ; RALT & Space::Send {BackSpace}
+;    ; RALT & Space::AltTab
+;    LALT & Tab::AltTab
+;    ; RALT & LALT::ShiftAltTab
+;    RCTRL & Up::AltTab
+;    RCTRL & Down::ShiftAltTab
+;    ; RALT & RCTRL::ShiftAltTab
+;    ;RALT & CapsLock::AltTab
+;    ;RALT & LShift::ShiftAltTab
+;    ;LALT & w::Send ^w
+;
+;    RALT & 3::RunOrActivate(mstscPath, "con103")
+;    RALT & [::RunOrActivate(kittyPath)
+;    RALT & b::SendRaw \\
+;    ;RALT & q::SendRaw '
+;    RALT & t::Send {Tab}
+;    RALT & e::Send {Escape}
+;    ;RALT & f::Send {Enter}
+;    RALT & s::RunOrActivate(nvimqtPath)
+;    RALT & v::SendRaw |
+;    RALT & w::SendRaw "
+;    RALT & x::SendRaw ?
+;    RALT & z::SendRaw /
+;    RALT & `::RunOrActivate(nvimPath)
+;    RALT & g::
+;        altR := vimfmPath
+;        RunOrActivate(vifmPath)
+;        Return
+;    RALT & c::RunOrActivate(chromePath) 
+;    RALT & a::RunOrActivate(vsCodePath)
+;    End::Ctrl
+;    AppsKey::RCTRL
+;    AppsKey & \;::Send ^l
+;    AppsKey & a::Send ^a
+;    AppsKey & c::Send ^c
+;    AppsKey & d::Send #d
+;    AppsKey & f::Run, %hapPath%
+;    AppsKey & r::Send ^r
+;    AppsKey & s::Send ^s
+;    AppsKey & w::Send ^w
+;    AppsKey & 4::Send !{F4}
+;    ;AppsKey & Space::Send ^{Backspace}
+;    RCTRL   & Space::Send ^{Backspace}
+;
+;    RWIN & \;::Send ^L
+;    RWIN & `::Send ^`
+;    RWIN & 1::Send ^1
+;    RWIN & 2::Send ^2
+;    RWIN & 3::Send ^3
+;    RWIN & 4::Send ^4
+;    RWIN & 5::Send ^5
+;    RWIN & 6::Send ^6
+;    RWIN & 7::Send ^7
+;    RWIN & 8::Send ^8
+;    RWIN & 9::Send ^9
+;    RWIN & c::Send ^c
+;    RWIN & d::Send ^d
+;    RWIN & r::Send ^r
+;    RWIN & s::Send ^s
+;    RWIN & t::Send ^t
+;    RWIN & u::Send ^u
+;    RWIN & v::Send ^v
+;    RWIN & w::Send ^w
+;    ; LWIN & z::run Shutdown /s /t 0
+;    ; LWIN & q::run Shutdown /r /t 0
+;
+;    0 & q::SendRaw ^
+;    0 & w::SendRaw &
+;    0 & e::SendRaw *
+;    0 & r::SendRaw (
+;    0 & t::SendRaw )
+;    0 & a::SendRaw !
+;    0 & s::SendRaw @
+;    0 & d::SendRaw #
+;    0 & f::SendRaw $
+;    0 & c::SendRaw _
+;
+;    ; Left Mid Finger Shift
+;    3 & RALT::SendRaw 0
+;    3 & RCTRL::SendRaw .
+;    3 & RSHIFT::Enter
+;    3 & m::SendRaw 0
+;    3 & ,::SendRaw 1
+;    3 & .::SendRaw 2
+;    3 & /::SendRaw 3
+;    3 & k::SendRaw 4
+;    3 & l::SendRaw 5
+;    3 & \;::SendRaw 6
+;    3 & i::SendRaw 7
+;    3 & o::SendRaw 8
+;    3 & p::SendRaw 9
+;    3 & 9::SendRaw /
+;    3 & 0::SendRaw *
+;    3 & -::SendRaw -
+;    3 & j::SendRaw +
+;    3 & '::SendRaw +
+;    3 & [::SendRaw -
+;    3 & ]::=
+;    3 & u::SendRaw -
+;    3 & y::SendRaw *
+;    3 & c::SendRaw rvl-pv-connvm06
+;    3 & r::SendRaw rvl-pv-nvm
+;    3 & w::SendRaw Wevalid8
+;    $3::3
+;
+;    #IF kShift
+;        ;k & Space::SendRaw j
+;        ;k & Space::Send {Backspace}
+;        k & Space::Send {Escape}
+;        k & 1::SendRaw !
+;        k & 2::SendRaw @
+;        k & 3::SendRaw #
+;        k & 4::SendRaw $
+;        k & 5::SendRaw \%
+;        k & 6::SendRaw ^
+;        k & q::SendRaw Q
+;        k & w::SendRaw W
+;        k & e::SendRaw E
+;        k & r::SendRaw R
+;        k & t::SendRaw T
+;        k & a::SendRaw A
+;        k & s::SendRaw S
+;        k & d::SendRaw D
+;        k & f::SendRaw F
+;        k & g::SendRaw G
+;        k & z::SendRaw Z
+;        k & x::SendRaw X
+;        k & c::SendRaw C
+;        k & v::SendRaw V
+;        k & b::SendRaw B
+;        k & `::SendRaw ~
+;    #IF
+;;}}}
+;
+;    $f::f
+;    f & 6::Return
+;    f & 7::SendRaw ^
+;    f & 8::SendRaw &
+;    f & 9::SendRaw *
+;    f & 0::SendRaw (
+;    f & -::SendRaw )
+;    f & =::SendRaw _
+;    f & Backspace::SendRaw +
+;    f & l::SendRaw K
+;    f & i::SendRaw U
+;    f & o::SendRaw I
+;    f & p::SendRaw O
+;    f & [::SendRaw P
+;    f & ]::SendRaw {
+;    f & \::SendRaw }
+;    f & u::SendRaw Y
+;    f & j::SendRaw H
+;    f & k::SendRaw J
+;    f & \;::SendRaw L
+;    f & '::SendRaw :
+;    f & m::SendRaw N
+;    f & ,::SendRaw M
+;    f & .::SendRaw <
+;    f & /::SendRaw >
+;    f & RALT::Send {Enter}
+;    ;f & RALT::Send ^{BackSpace}
+;    ;f & RALT::Send {Backspace}
+;    ;f & Space::Send {Escape}
+;    ;RALT & e::Send {Escape}
+;
+;    ; MEDIA KEYS
+;    ;2 & k::Send {Volume_Down}{Volume_Down}{Volume_Down}{Volume_Down}{Volume_Down}
+;    2 & l::Send {Volume_Up}{Volume_Up}{Volume_Up}{Volume_Up}{Volume_Up}
+;    RShift & Down::Send  {Volume_Down}{Volume_Down}{Volume_Down}{Volume_Down}{Volume_Down}
+;    RShift & Up::Send {Volume_Up}{Volume_Up}{Volume_Up}{Volume_Up}{Volume_Up}
+;    2 & j::Send {Media_Prev}
+;    2 & \;::Send {Media_Next}
+;    2 & [::Send {Media_Play_Pause} 
+;    2 & ,::Send {Volume_Mute} 
+;    2 & o::BS.SetBrightness(15)
+;    2 & i::BS.SetBrightness(-15)
+;    ;2 & p::Send {LWin Down}{Ctrl Down}c{Ctrl Up}{LWin Up}  ; toggle Wintools invert
+;    Enter & p::Send {LWin Down}{Ctrl Down}c{Ctrl Up}{LWin Up}  ; toggle Wintools invert
+;    2 & u::Send {Shift Down}{F11}{Shift Up}                ; toggle Chrome Deliminate plugin
+;    2 & ]::Send {Shift Down}{Ctrl Down}{F12}{Shift Up}{Ctrl Up}   ; Chrome Deliminate plugin
+;    2 & RALT::RunOrActivate("explorer.exe")
+;    $2::2 
+;
+;#IF
+;; }}} shiftRight1
+;
+;; {{{ #IF shiftRightHand2
+;#IF shiftRightHand2
+;    \;::k
+;    l::j
+;    i::y
+;    o::u
+;    p::i
+;    '::l
+;    [::o
+;
+;    ]::p
+;    \::[
+;    u::y
+;    k::h
+;
+;   ; \;::l
+;    Enter::;
+;    j::h
+;    h::Backspace
+;    m::n
+;    ;]::m
+;    ,::n
+;    .::m
+;    /::,
+;    Rshift::.
+;    y::Tab
+;    n::Enter
+;    7::6
+;    8::7
+;    9::8
+;    0::9
+;    -::0
+;    =::-
+;    Backspace::=
+;    RALT::AppsKey
+;    AppsKey & Space::Send {BackSpace}
+;#IF
 ;}}}
 
 ;    layer 1:

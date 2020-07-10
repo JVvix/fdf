@@ -7,10 +7,11 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 eQWERTY.ahk
+badd +266 ~\fdf\vimrc
+badd +26 ~\fdf\fayevimrc
 argglobal
 %argdel
-edit eQWERTY.ahk
+edit ~\fdf\vimrc
 set splitbelow splitright
 wincmd t
 set winminheight=0
@@ -22,21 +23,16 @@ setlocal fdm=marker
 setlocal fde=0
 setlocal fmr={{{,}}}
 setlocal fdi=#
-setlocal fdl=0
+setlocal fdl=1
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-1
-normal! zo
-668
-normal! zo
-let s:l = 1 - ((0 * winheight(0) + 40) / 80)
+let s:l = 266 - ((17 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+266
 normal! 0
-lcd ~\fdf
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

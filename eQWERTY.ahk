@@ -2,17 +2,20 @@
 ; #IF
 ;AsusVivo         := True
 ShiftOuter        := True
-shiftRight1       := False
+;shiftRight1       := False
 ;shiftRight2       := True
-kShift            := True
-fShift            := True
-dellXps           := True
-OldStuff          := False
-rRwinMapCtrl      := True
+;kShift            := True
+;fShift            := True
+;dellXps           := True
+;OldStuff          := False
+;rRwinMapCtrl      := True
 ;enableTap         := True
 ;enableMouseMode   := True
 enablePrevious    := True
 
+#IF AppsKey2nd
+    MsgBox startup msg: key right to Ralt is appskey
+#IF ;AppsKey2nd
 EnvGet, HOME, USERPROFILE
 ;EnvGet, SNAM,
 HOME              := StrReplace(HOME, "\", "\\") 
@@ -246,46 +249,45 @@ F12::
 RALT & LALT::Send ^{Backspace}
 ;RALT & Tab::Send #{Tab}
 ;RALT & Space::Send {BackSpace}
-RALT & Space::Send {BackSpace}
-LALT::Send {Enter}
-; RALT & Space::Send {BackSpace}
-; RALT & Space::AltTab
-LALT & Tab::AltTab
-; RALT & LALT::ShiftAltTab
-RCTRL & Up::AltTab
-RCTRL & Down::ShiftAltTab
-; RALT & RCTRL::ShiftAltTab
-;RALT & CapsLock::AltTab
-;RALT & LShift::ShiftAltTab
-
-;RALT & 3::RunOrActivate(mstscPath, "con103")
-;RALT & [::RunOrActivate(kittyPath)
-;RALT & b::SendRaw \\
-;RALT & q::SendRaw '
-;RALT & t::Send {Tab}
-;RALT & e::Send {Escape}
-;RALT & f::Send {Enter}
-RALT & s::RunOrActivate(nvimqtPath)
-;RALT & v::SendRaw |
-;RALT & w::SendRaw "
-;RALT & x::SendRaw ?
-;RALT & z::SendRaw /
-;RALT & `::RunOrActivate(nvimPath)
-RALT & g::
-    altR := vimfmPath
-    RunOrActivate(vifmPath)
-    Return
-;RALT & c::RunOrActivate(chromePath)
-;RALT & a::RunOrActivate(vsCodePath)
-;RALT & '::Send {Enter}
-;RALT & RShift::Send ^n
-End::Ctrl
-
-Backspace & e::MouseMove,   0, -25 , 0, R
-Backspace & d::MouseMove,   0,  25 , 0, R
-Backspace & s::MouseMove, -25,  0,   0, R
-Backspace & f::MouseMove,  25,  0,   0, R
-Backspace & Space::MouseClick Right
+;LALT::Send {Enter}
+;; RALT & Space::Send {BackSpace}
+;; RALT & Space::AltTab
+;LALT & Tab::AltTab
+;; RALT & LALT::ShiftAltTab
+;RCTRL & Up::AltTab
+;RCTRL & Down::ShiftAltTab
+;; RALT & RCTRL::ShiftAltTab
+;;RALT & CapsLock::AltTab
+;;RALT & LShift::ShiftAltTab
+;
+;;RALT & 3::RunOrActivate(mstscPath, "con103")
+;;RALT & [::RunOrActivate(kittyPath)
+;;RALT & b::SendRaw \\
+;;RALT & q::SendRaw '
+;;RALT & t::Send {Tab}
+;;RALT & e::Send {Escape}
+;;RALT & f::Send {Enter}
+;RALT & s::RunOrActivate(nvimqtPath)
+;;RALT & v::SendRaw |
+;;RALT & w::SendRaw "
+;;RALT & x::SendRaw ?
+;;RALT & z::SendRaw /
+;;RALT & `::RunOrActivate(nvimPath)
+;RALT & g::
+;    altR := vimfmPath
+;    RunOrActivate(vifmPath)
+;    Return
+;;RALT & c::RunOrActivate(chromePath)
+;;RALT & a::RunOrActivate(vsCodePath)
+;;RALT & '::Send {Enter}
+;;RALT & RShift::Send ^n
+;End::Ctrl
+;
+;Backspace & e::MouseMove,   0, -25 , 0, R
+;Backspace & d::MouseMove,   0,  25 , 0, R
+;Backspace & s::MouseMove, -25,  0,   0, R
+;Backspace & f::MouseMove,  25,  0,   0, R
+;Backspace & Space::MouseClick Right
 
 ; Left Pinky Shift
 ;3 & RALT::SendRaw 0
@@ -536,12 +538,15 @@ Backspace & Space::MouseClick Right
     ` & k::send #{Left}
     ` & '::send #{Right}
     Del::
-        Suspend ;  very first line
-        ToolTip % A_IsSuspended ? "eQWERTY Suspended" : "", 10, 10
-        Return
+       Suspend ;  very first line
+       msgbox eQWERTY.ahk suspension toggled
+       ;ToolTip % A_IsSuspended ? "eQWERTY Suspended" : "", 10, 10
+       Return
 
 ;    lwin & backspace::sendraw +
-    lwin::Send {Tab}
+    ;lwin::Send {Tab}
+    lwin::msgbox Tab is AppKey or RCTRL
+    appskey::Send {Tab}
     lwin & '::send ^l
     lwin & \;::send ^k
     lwin & x::send ^c
@@ -639,7 +644,6 @@ SetTitleMatchMode, 2
     1 & l::Send ^{WheelDown} 
     1 & \;::Send ^{WheelUp} 
     1 & '::Send !{Space}f
-    lalt & r::Send ^bq
 #IfWinActive
 
 #IfWinActive, ahk_exe nvim-qt.exe

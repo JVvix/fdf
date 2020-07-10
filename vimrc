@@ -1,4 +1,4 @@
-"<M-h>l ~/fdf/vimrc - BEGIN
+"~/fdf/vimrc - BEGIN
 " NOTE: Vim fold commands: zr - unfold / zm - fold
 
 " let/set {{{
@@ -263,7 +263,7 @@ nnoremap   sdj          ]czz
 nnoremap   sdp          :diffput<CR>
 vnoremap   sdp          :diffput<CR>
 nnoremap   sdu          :diffupdate<CR>
-nnoremap   sf           /
+     map   fn           <Plug>(easymotion-next)
 nnoremap   sh           <C-w>h
 nnoremap   sj           <C-w>j
 nnoremap   sk           <C-w>k

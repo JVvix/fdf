@@ -18,6 +18,11 @@ nnoremap ,w  :w<cr>
 nnoremap ,x  :x<cr>
 nnoremap ,q  :q!<cr>
 "nnoremap <c-w> bdw
+"git commanads"
+nnoremap gis :!git status<cr>
+nnoremap gia :!git add -A<cr>
+nnoremap gic :!git commit -m ""<left>
+nnoremap gip :!git push<cr>
 "save and run mapping
 nnoremap gp  :w<CR>:!python %<CR>
 nnoremap ,cp :w<CR> :!cmd /c %<CR>
@@ -46,19 +51,19 @@ inoremap  UU <left><C-o>gUiw<C-o>e<right>
 
 " type :PlugInstall to install plugins
 call plug#begin('~/dotfiles/plugged')
-	Plug 'scrooloose/nerdcommenter'
-	Plug 'easymotion/vim-easymotion'
-	Plug 'valloric/youcompleteme'
-	Plug 'scrooloose/syntastic'
-	Plug 'tpope/vim-surround'
-	Plug 'michaeljsmith/vim-indent-object'
-	Plug 'tpope/vim-repeat'
-	Plug 'vim-airline/vim-airline'
-	Plug 'nanotech/jellybeans.vim'
-	Plug 'vim-airline/vim-airline'
+Plug 'scrooloose/nerdcommenter'
+Plug 'easymotion/vim-easymotion'
+Plug 'valloric/youcompleteme'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'tpope/vim-repeat'
+Plug 'vim-airline/vim-airline'
+Plug 'nanotech/jellybeans.vim'
+Plug 'vim-airline/vim-airline'
 call plug#end()
 
-map       <Space>         <Plug>(easymotion-overwin-f)
+" map       <Space>         <Plug>(easymotion-overwin-f)
 
 " replaces words with new
 nnoremap   ,r           :%s/\<<C-r><C-w>\>//g<Left><Left>

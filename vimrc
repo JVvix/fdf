@@ -158,7 +158,7 @@ nnoremap   gdf         :edit ~/fdf<cr>
 nnoremap   gdl         :edit ~/Downloads<cr>
 nnoremap   ged         :call NavigateLeftHanded()<cr>
 nnoremap   gh          :noh<cr>
-nnoremap   gi          mZgg=G`Z                           " global indent
+"nnoremap   gi          mZgg=G`Z                           " global indent
 " nnoremap   gk	       :w<CR>>:<UP><CR>
 nnoremap   gnl         :call NavigateLeftHanded()<cr>
 nnoremap   go          :browse oldfiles<cr>
@@ -246,6 +246,7 @@ map        s2           <Plug>(easymotion-overwin-f2)
 nnoremap   S            <Nop>
 nnoremap   SF           :Startify<cr>
 nnoremap   SS           S
+nnoremap   ST           :silent !start pythonw c:\users\fly\src\timerpy\timer.py<cr>
 nnoremap   SW           :w<cr>:source %<cr>
 nnoremap   s            <Nop>
 nnoremap   s=           <C-w>=

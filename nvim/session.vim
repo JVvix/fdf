@@ -7,8 +7,9 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +266 ~\fdf\vimrc
-badd +26 ~\fdf\fayevimrc
+badd +1 ~\fdf\bin\Neovim\share\nvim\runtime\doc\help.txt
+badd +184 ~\fdf\vimrc
+badd +102 ~\fdf\eQWERTY.ahk
 argglobal
 %argdel
 edit ~\fdf\vimrc
@@ -27,11 +28,13 @@ setlocal fdl=1
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 266 - ((17 * winheight(0) + 17) / 35)
+734
+normal! zo
+let s:l = 773 - ((10 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-266
+773
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

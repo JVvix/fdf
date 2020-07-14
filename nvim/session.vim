@@ -7,9 +7,8 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 ~\fdf\bin\Neovim\share\nvim\runtime\doc\help.txt
-badd +184 ~\fdf\vimrc
-badd +102 ~\fdf\eQWERTY.ahk
+badd +1020 ~\fdf\eQWERTY.ahk
+badd +1 ~\fdf\vimrc
 argglobal
 %argdel
 edit ~\fdf\vimrc
@@ -24,24 +23,22 @@ setlocal fdm=marker
 setlocal fde=0
 setlocal fmr={{{,}}}
 setlocal fdi=#
-setlocal fdl=1
+setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-734
-normal! zo
-let s:l = 773 - ((10 * winheight(0) + 19) / 39)
+let s:l = 1059 - ((21 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-773
-normal! 0
+1059
+normal! 02|
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=20 winminheight=1 winminwidth=1 shortmess=filnxtToOFI
+set winheight=1 winwidth=20 winminheight=1 winminwidth=1 shortmess=filnxtToOF
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if file_readable(s:sx)
   exe "source " . fnameescape(s:sx)

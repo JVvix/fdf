@@ -40,12 +40,13 @@ pushNvimCfg       := HOME . "\\fdf\\PushNvim.ahk"
 ; powershellPath    := "powershell.exe"
 tapPathAhk        := HOME . "\\fdf\\tap.ahk"
 tapPathExe        := HOME . "\\fdf\\tap.exe"
+timerPath         := "pythonw " . HOME . "\\src\\timerpy\timer.py"
 vifmPath          := HOME . "\\fdf\\bin\\vifm.exe"
 vsCodePath        := "C:\\Program Files\\Microsoft VS Code\\Code.exe"
+minttyPath         := "c:\\Progra~1\\Git\\bin\\mintty.exe"
+;c:\\Progra~1\\Git\\git-bash.exe
 ;vsCodePath        := HOME . "\\VScode\\code.exe"
 YTdownloadAHKPath    := HOME . "\\fdf\youtube-dl.ahk"
-minttyPath        := "C:\\Program Files\\Git\\usr\\bin\\mintty.exe"
-;minttyPath        := "C:\\Program Files\\Git\\git-bash.exe"
 ;"C:\Program Files\Git\git-bash.exe" --cd-to-home
 for n, param in A_Args  ; For each parameter:
 {
@@ -586,10 +587,12 @@ RALT & LALT::Send ^{Backspace}
     RALT & p::Send {PgDn}
     ;RALT & ]::RunOrActivate(kittyPath)
     RALT & r::RunOrActivate(kittyPath)  ; alt-t (terminal)
+    RALT & t::RunOrActivate(timerPath)  ; alt-y (timer)
     RALT & `::sendraw `
     RALT & c::RunOrActivate(nvimqtPath) ; alt-v (vim)
     1    & k::RunOrActivate(connectifyPath) ; alt-h hotspot
     RALT & k::Send {Left}
+    RALT & z::Send !{F4}
     RALT & /::Send ^{Right}
     RALT & .::Send ^{Left}
     RALT & 1::Send [

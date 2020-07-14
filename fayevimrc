@@ -17,7 +17,7 @@ nnoremap ,s% :source %<cr>
 nnoremap ,w  :w<cr>
 nnoremap ,x  :x<cr>
 nnoremap ,q  :q!<cr>
-"nnoremap <c-w> bdw
+
 "git commanads"
 nnoremap gis :!git status<cr>
 nnoremap gia :!git add -A<cr>
@@ -47,7 +47,6 @@ inoremap  `' '
 inoremap  `" "
 inoremap  `( (
 inoremap  UU <left><C-o>gUiw<C-o>e<right>
-" te  ESTTEST aTEST 
 
 " type :PlugInstall to install plugins
 call plug#begin('~/dotfiles/plugged')

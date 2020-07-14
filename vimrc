@@ -120,12 +120,12 @@ let g:line=2
 "
 nnoremap <c-i> <c-o>
 nnoremap <c-o> <c-i>
-nnoremap n nzz7<C-e>
-nnoremap N Nzz7<C-e>
-nnoremap * *zz7<C-e>
-nnoremap # #zz7<C-e>
-nnoremap g* g*zz7<C-e>
-nnoremap g# g#zz7<C-e>
+" nnoremap n nzz7<C-e>
+" nnoremap N Nzz7<C-e>
+" nnoremap * *zz7<C-e>
+" nnoremap # #zz7<C-e>
+" nnoremap g* g*zz7<C-e>
+" nnoremap g# g#zz7<C-e>
 
 " change from 1 slash to 2 slashes
 nnoremap \\   :!
@@ -257,6 +257,7 @@ nnoremap   sL 	        :vertical resize +5<cr>
 nnoremap   sN           :new<cr>
 nnoremap   sS           :split<cr>
 nnoremap   sb           ?
+nnoremap   sf           /
 nnoremap   sdg          :diffget<CR>
 vnoremap   sdg          :diffget<CR>
 nnoremap   sdk          [czz
@@ -969,6 +970,7 @@ if !exists('g:loaded_plug')  " Only load if it hasn't been loaded.
         Plug 'fudesign2008/websearch.vim'
         Plug 'morhetz/gruvbox'
         Plug 'neoclide/coc.nvim'     " new completion
+        Plug 'liuchengxu/vim-which-key'
     call plug#end()
 endif
 
@@ -1054,7 +1056,7 @@ nnoremap  gq      q
 nnoremap ,of          :%s//'/g
 nnoremap ,oc          :r !python \%userprofile\%\\fdf\\ocr.py<CR>:%s//'/g<CR>
 
-
+" source ~/fdf/fayevimrc
 "Gstatus
 
 " Test area:

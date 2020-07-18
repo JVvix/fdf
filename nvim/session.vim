@@ -7,11 +7,15 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1020 ~\fdf\eQWERTY.ahk
+badd +1 ~\src\timerpy\timer.py
+badd +10 ~\src\tkToDo\tkToDo.py
+badd +1 ~\fdf\fayevimrc
+badd +2 ~\fdf\test.py
 badd +1 ~\fdf\vimrc
+badd +641 ~\fdf\eQWERTY.ahk
 argglobal
 %argdel
-edit ~\fdf\vimrc
+edit ~\fdf\fayevimrc
 set splitbelow splitright
 wincmd t
 set winminheight=0
@@ -27,18 +31,18 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 1059 - ((21 * winheight(0) + 17) / 35)
+let s:l = 1 - ((0 * winheight(0) + 17) / 35)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1059
-normal! 02|
+1
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
-set winheight=1 winwidth=20 winminheight=1 winminwidth=1 shortmess=filnxtToOF
+set winheight=1 winwidth=20 winminheight=1 winminwidth=1 shortmess=filnxtToOFI
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if file_readable(s:sx)
   exe "source " . fnameescape(s:sx)

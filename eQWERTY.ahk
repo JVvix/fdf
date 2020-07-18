@@ -14,7 +14,7 @@ ShiftOuter        := True
 enablePrevious    := True
 
 #IF AppsKey2nd
-    MsgBox startup msg: key right to Ralt is appskey
+    ;MsgBox startup msg: key right to Ralt is appskey
 #IF ;AppsKey2nd
 EnvGet, HOME, USERPROFILE
 ;EnvGet, SNAM,
@@ -41,6 +41,7 @@ pushNvimCfg       := HOME . "\\fdf\\PushNvim.ahk"
 tapPathAhk        := HOME . "\\fdf\\tap.ahk"
 tapPathExe        := HOME . "\\fdf\\tap.exe"
 timerPath         := "pythonw " . HOME . "\\src\\timerpy\timer.py"
+programLauncher         := "pythonw " . HOME . "\\src\\tkUI\tkUI.py"
 vifmPath          := HOME . "\\fdf\\bin\\vifm.exe"
 vsCodePath        := "C:\\Program Files\\Microsoft VS Code\\Code.exe"
 minttyPath         := "c:\\Progra~1\\Git\\bin\\mintty.exe"
@@ -561,7 +562,8 @@ RALT & LALT::Send ^{Backspace}
     ;lalt & k::send !{Left} 
     ;lshift & rshift::send ?
 
-    lalt::Send {Escape}
+    ralt::Send {Escape}
+    ;lalt::Send {Escape}
     lalt & backspace::sendraw \=
     2    & backspace::sendraw + 
     lalt & -::sendraw {
@@ -587,7 +589,8 @@ RALT & LALT::Send ^{Backspace}
     RALT & p::Send {PgDn}
     ;RALT & ]::RunOrActivate(kittyPath)
     RALT & r::RunOrActivate(kittyPath)  ; alt-t (terminal)
-    RALT & t::RunOrActivate(timerPath)  ; alt-y (timer)
+    ;RALT & t::RunOrActivate(timerPath)  ; alt-y (timer)
+    RALT & t::RunOrActivate(programLauncher)  ; alt-y (timer)
     RALT & `::sendraw `
     RALT & c::RunOrActivate(nvimqtPath) ; alt-v (vim)
     1    & k::RunOrActivate(connectifyPath) ; alt-h hotspot
@@ -1020,4 +1023,4 @@ SetTitleMatchMode, 2
 ;       - avoid reaching - especially the BackSpace key, it is the 2nd most used key, but is placed so far from 
 ;         the home row. This layout can do back space with the LayerKey (RALT + Space)
 ;      
-;  - Weakness of the time ths
+; This is a test.

@@ -593,7 +593,7 @@ RALT & LALT::Send ^{Backspace}
     ;RALT & ]::RunOrActivate(kittyPath)
     RALT & r::RunOrActivate(kittyPath)  ; alt-t (terminal)
     RALT & t::RunOrActivate(timerPath)  ; alt-t (terminal)
-    RALT & LShift::RunOrActivate("shutdown /l")  ; alt-t (terminal)
+    RALT & Esc::RunOrActivate("shutdown /l")  ; alt-t (terminal)
     RALT & `::sendraw `
     RALT & c::RunOrActivate(nvimqtPath) ; alt-v (vim)
     1    & k::RunOrActivate(connectifyPath) ; alt-h hotspot

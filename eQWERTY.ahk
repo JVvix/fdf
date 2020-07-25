@@ -40,14 +40,13 @@ pushNvimCfg       := HOME . "\\fdf\\PushNvim.ahk"
 ; powershellPath    := "powershell.exe"
 tapPathAhk        := HOME . "\\fdf\\tap.ahk"
 tapPathExe        := HOME . "\\fdf\\tap.exe"
-timerPath         := "pythonw " . HOME . "\\src\\timerpy\timer.py"
-programLauncher         := "pythonw " . HOME . "\\src\\tkUI\tkUI.py"
 vifmPath          := HOME . "\\fdf\\bin\\vifm.exe"
+timerPath         := "pythonw " . HOME . "\\src\\tkUI\\tkUI.py"
 vsCodePath        := "C:\\Program Files\\Microsoft VS Code\\Code.exe"
-minttyPath         := "c:\\Progra~1\\Git\\bin\\mintty.exe"
-;c:\\Progra~1\\Git\\git-bash.exe
 ;vsCodePath        := HOME . "\\VScode\\code.exe"
 YTdownloadAHKPath    := HOME . "\\fdf\youtube-dl.ahk"
+minttyPath        := "C:\\Program Files\\Git\\usr\\bin\\mintty.exe"
+;minttyPath        := "C:\\Program Files\\Git\\git-bash.exe"
 ;"C:\Program Files\Git\git-bash.exe" --cd-to-home
 for n, param in A_Args  ; For each parameter:
 {
@@ -102,7 +101,7 @@ if( "CAR-LT-C50626B" <> A_ComputerName) {
 }
 
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
-#Include %A_ScriptDir%\DimScreen.ahk
+#Include %A_ScriptDir%\DimScreen.ahk   ; ~/fdf/DimScreen.ahk  nvim path to open
 #Include %A_ScriptDir%\passwords.ahk
 #Include %A_ScriptDir%\FindClick.ahk
 #Include %A_ScriptDir%\RunOrActivate.ahk
@@ -445,7 +444,7 @@ RALT & LALT::Send ^{Backspace}
     p::i
     [::o
     ]::p
-    ;\::MsgBox Tab is left Win
+    \::Tab
     d & \::send |
 
     d & i::sendraw Y
@@ -547,8 +546,10 @@ RALT & LALT::Send ^{Backspace}
 
 ;    lwin & backspace::sendraw +
     ;lwin::Send {Tab}
-    lwin::msgbox Tab is AppKey or RCTRL
+    lwin::msgbox Press AppKey or RCTRL for Tab
     appskey::Send {Tab}
+    ;rctrl::Send {Tab}
+    rctrl::Send {Enter}
     lwin & '::send ^l
     lwin & \;::send ^k
     lwin & x::send ^c
@@ -562,8 +563,10 @@ RALT & LALT::Send ^{Backspace}
     ;lalt & k::send !{Left} 
     ;lshift & rshift::send ?
 
-    ralt::Send {Escape}
-    ;lalt::Send {Escape}
+    ; test lalt
+    lalt::Send {Escape}
+    ralt & z::Send !{F4}
+    ;lalt::Send {Enter}
     lalt & backspace::sendraw \=
     2    & backspace::sendraw + 
     lalt & -::sendraw {
@@ -589,13 +592,12 @@ RALT & LALT::Send ^{Backspace}
     RALT & p::Send {PgDn}
     ;RALT & ]::RunOrActivate(kittyPath)
     RALT & r::RunOrActivate(kittyPath)  ; alt-t (terminal)
-    ;RALT & t::RunOrActivate(timerPath)  ; alt-y (timer)
-    RALT & t::RunOrActivate(programLauncher)  ; alt-y (timer)
+    RALT & t::RunOrActivate(timerPath)  ; alt-t (terminal)
+    RALT & LShift::RunOrActivate("shutdown /l")  ; alt-t (terminal)
     RALT & `::sendraw `
     RALT & c::RunOrActivate(nvimqtPath) ; alt-v (vim)
     1    & k::RunOrActivate(connectifyPath) ; alt-h hotspot
     RALT & k::Send {Left}
-    RALT & z::Send !{F4}
     RALT & /::Send ^{Right}
     RALT & .::Send ^{Left}
     RALT & 1::Send [
@@ -605,8 +607,9 @@ RALT & LALT::Send ^{Backspace}
     RALT & w::MsgBox Escape is left Alt (left of Spacebar)
     RALT & x::RunOrActivate(chromePath)
     RALT & a::RunOrActivate(minttyPath)
-    d & RALT::send {Enter}
-    lalt & RALT::send {Enter}
+    ;d & RALT::send {Enter}
+    d & RALT::MsgBox Enter is RCTRL
+    ;lalt & RALT::send {Enter}
     ctrl & space::Send ^{BackSpace}
     l & space::Run %A_AhkPath% %MouseModeAhk%
     ralt & lalt::!Tab
@@ -1023,4 +1026,5 @@ SetTitleMatchMode, 2
 ;       - avoid reaching - especially the BackSpace key, it is the 2nd most used key, but is placed so far from 
 ;         the home row. This layout can do back space with the LayerKey (RALT + Space)
 ;      
-; This is a test.
+;  - Weakness of the time ths
+; eQWERTY.ahk:999

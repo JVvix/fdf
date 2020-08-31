@@ -31,6 +31,7 @@ set foldmethod=marker   " zm/zr - fold/unfold
 set foldmarker={{{,}}}
 set clipboard+=unnamedplus " need for copying and pasting from windows clipboard
 set expandtab      " On pressing tab, insert 4 spaces
+set hidden
 set inccommand=split
 set incsearch
 set hlsearch
@@ -55,6 +56,21 @@ set smartcase                     " turn on smartcase
 " set directory=.swp/,~/.swp/,/tmp//
 " set undodir=.undo/,~/.undo/,/tmp//
 "}}}
+
+" completion settings
+set complete+=kspell
+set completeopt=menuone,longest,preview
+" set shortmess+=c
+"inoremap <expr> <Right> pumvisible() ? "C-y" : "<Right>"
+"inoremap <expr> <CR> pumvisible() ? "C-y" : "<CR>"
+
+" https://vim.fandom.com/wiki/Improve_completion_popup_menu
+inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 
 " nnoremap <leader> section {{{
 nnoremap <leader>1 	 :!
@@ -141,7 +157,9 @@ nnoremap <expr> <leader>st &showtabline ? ":set showtabline=0\<cr>" : ":set show
 nnoremap   g=          :<C-r>=
 nnoremap   g,	       /><CR>ci<
 nnoremap   g0	       /)<CR>ci(
+nnoremap   g0	       :bn<CR>
 nnoremap   g9	       /)<CR>ci(
+nnoremap   g9	       :bp<cr>
 nnoremap   gH          H
 nnoremap   gL          L
 nnoremap   gM          M
@@ -201,8 +219,12 @@ nnoremap   dA           :%d_<CR>
 
 " F mappings
 nnoremap   F            <Nop>
+nnoremap   f            <Nop>
+nnoremap   fl           f
+nnoremap   fh           F
 nnoremap   FF	        :CtrlP<cr>
 nnoremap   FS	        :let g:full_screen=!g:full_screen <bar> call GuiWindowFullScreen(g:full_screen) <bar> echom "fullscreen toggled"<CR> 
+nnoremap   fs           :let g:full_screen=!g:full_screen <bar> call GuiWindowFullScreen(g:full_screen) <bar> echom "fullscreen toggled"<CR> 
 
 " G mappings
 nnoremap   G            <Nop>
@@ -223,6 +245,9 @@ nnoremap   G_pageup    <PageUp>
 nnoremap   gy          :Goyo 100%<cr>
 nnoremap   g9          {:<C-u>call search('^.\+')<cr>
 nnoremap   g)          }k
+nnoremap   gbh         :bp<cr>
+nnoremap   gbl         :bn<cr>
+nnoremap   gbd         :bd<cr>
 nnoremap   Gr          :Grep \<<C-r><C-w>\><CR>
 nnoremap   Gs	       :Gstatus<cr>
 nnoremap   GS          :call Google()<CR>
@@ -243,6 +268,7 @@ nnoremap   `            m
 
 " s mappings
 map        s2           <Plug>(easymotion-overwin-f2)
+inoremap   <C-e>        <C-o>:<Plug>(easymotion-overwin-f2)<CR>
 nnoremap   S            <Nop>
 nnoremap   SF           :Startify<cr>
 nnoremap   SS           S
@@ -570,6 +596,7 @@ function! PageDown()
         execute "normal! H" . top_line. "\<Down>"
         call smooth_scroll#down(winheight('%'), 5, 1)
     else
+        echo 'DEBUG: PageDown() ' . top_line
         execute "normal! \<Pagedown>2\<C-e>"
         execute "normal! H" . top_line. "\<Down>"
         return
@@ -583,6 +610,7 @@ function! PageUp()
         execute "normal! H" . top_line. "\<Down>"
         call smooth_scroll#up(winheight('%'), 5, 1)
     else
+        echo 'DEBUG: PageUp() ' . top_line
         execute "normal! \<Pageup>2\<C-y>"
         execute "normal! H" . top_line. "\<Down>"
         return
@@ -761,7 +789,9 @@ if hostname == "CAR-LT-C50626B"  " Work Setup. configured to be in light mode, t
     hi EasyMotionTarget2Second cterm=bold      ctermfg=40     gui=bold guifg=green
     hi EasyMotionTarget        ctermbg=none    ctermfg=green  gui=bold guifg=purple
     hi Folded                  ctermbg=grey    guifg=clear    guibg=#dddddd
-    hi CursorLine              ctermbg=grey    guifg=clear    guibg=lightgray
+    hi ActiveWindow            guibg=black    ctermbg=white
+    hi InactiveWindow          guibg=gray205  ctermbg=grey
+    "hi CursorLine              ctermbg=grey    guifg=clear    guibg=lightgray
     " hi Number                  guibg=grey      guifg=#5f8787  ctermbg=grey
     " hi Normal=white guifg=white
     " au CmdLineEnter * hi Normal ctermfg=cyan guifg=cyan
@@ -773,34 +803,45 @@ if hostname == "CAR-LT-C50626B"  " Work Setup. configured to be in light mode, t
 
     source ~/fdf/nvim/plug.vim    " call directly instead of using "autoload" directory
     echo "759 Plug.vim: loading for host " . hostname
-    call plug#begin('~/fdf/nvim/plugged')
-        Plug 'bling/vim-airline'
-        Plug 'vim-airline/vim-airline-themes'
-        Plug 'easymotion/vim-easymotion'
-        Plug 'michaeljsmith/vim-indent-object'      " https://github.com/michaeljsmith/vim-indent-object
-        Plug 'tpope/vim-commentary'
-        Plug 'tpope/vim-fugitive'
-        Plug 'ryanoasis/vim-devicons'
-        Plug 'kien/ctrlp.vim'                       " Fuzzy file finder / map to F
-        Plug 'airblade/vim-gitgutter'
-        " Plug 'yuttie/comfortable-motion.vim'        " Physic Motion
-        Plug 'terryma/vim-smooth-scroll'
-        Plug 'vim-scripts/matchit.zip'
-        Plug 'vim-scripts/svn-diff.vim'
-        " Plug 'machakann/vim-highlightedyank'
-        Plug 'MattesGroeger/vim-bookmarks'          " https://vimawesome.com/plugin/vim-bookmarks
-        Plug 'tpope/vim-vinegar'
-        Plug 'mtdl9/vim-log-highlighting'
-        " Plug 'majutsushi/tagbar'
-        Plug 'craigemery/vim-autotag'
-        Plug 'junegunn/goyo.vim'        " just text
-        Plug 'junegunn/limelight.vim'   " only highlight focus
-        Plug 'kassio/neoterm'
-        Plug 'neoclide/coc.nvim'     " new completion
-        Plug 'reedes/vim-pencil'
-        Plug 'beloglazov/vim-online-thesaurus'
-        Plug 'fudesign2008/websearch.vim'
-        Plug 'morhetz/gruvbox'
+    call plug#begin('~/df/nvim/plugged')
+    Plug 'bling/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'easymotion/vim-easymotion'
+    Plug 'michaeljsmith/vim-indent-object'      " https://github.com/michaeljsmith/vim-indent-object
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-fugitive'
+    Plug 'ryanoasis/vim-devicons'
+    Plug 'kien/ctrlp.vim'                       " Fuzzy file finder / map to F
+    Plug 'airblade/vim-gitgutter'
+    " Plug 'yuttie/comfortable-motion.vim'        " Physic Motion
+    Plug 'terryma/vim-smooth-scroll'
+    Plug 'vim-scripts/matchit.zip'
+    Plug 'vim-scripts/svn-diff.vim'
+    " Plug 'machakann/vim-highlightedyank'
+    Plug 'MattesGroeger/vim-bookmarks'          " https://vimawesome.com/plugin/vim-bookmarks
+    Plug 'tpope/vim-vinegar'
+    Plug 'mtdl9/vim-log-highlighting'
+    " Plug 'majutsushi/tagbar'
+    Plug 'craigemery/vim-autotag'
+    Plug 'junegunn/goyo.vim'        " just text
+    Plug 'junegunn/limelight.vim'   " only highlight focus
+    Plug 'kassio/neoterm'
+    " Autocomple Plugins
+    " Plug 'valloric/youcompleteme'
+    " Plug 'neoclide/coc.nvim'     " new completion
+    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Plug  'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
+    " Plug 'nvim-lua/completion-nvim'
+    " Plug 'neovim/nvim-lsp'
+    Plug 'vim-scripts/AutoComplPop'  " https://www.youtube.com/watch?v=2f8h45YR494
+    Plug 'reedes/vim-pencil'
+    Plug 'beloglazov/vim-online-thesaurus'
+    Plug 'fudesign2008/websearch.vim'
+    Plug 'morhetz/gruvbox'
+    Plug 'mhinz/vim-startify'
+    "Plug 'vim-scripts/Smooth-Center'
+    "Plug 'drzel/vim-scroll-off-fraction'
+    "Plug 'severin-lemaignan/vim-minimap'
     call plug#end()
     echom "hostname: " . hostname
 
@@ -811,7 +852,12 @@ if hostname == "CAR-LT-C50626B"  " Work Setup. configured to be in light mode, t
     nnoremap <A-t>                <Esc>:edit! ExecutorBuffer.java<cr>:%d_<cr>:silent !ExecutorBufferPull.ahk<cr>
 
     " Plug 'mtdl9/vim-log-highlighting' settings
+    colorscheme default
+    colorscheme gruvbox
+    hi normal guibg=black
+    hi normal ctermbg=black
     syn keyword logLevelError Error
+    hi jsonCommentError guifg=#928374 guibg=black
 endif 
 
 if hostname == "rvl-pv-ply-ub1804vm"  " VM at Microchip
@@ -969,8 +1015,8 @@ if !exists('g:loaded_plug')  " Only load if it hasn't been loaded.
         Plug 'terryma/vim-smooth-scroll'
         Plug 'fudesign2008/websearch.vim'
         Plug 'morhetz/gruvbox'
-        Plug 'neoclide/coc.nvim'     " new completion
-        Plug 'liuchengxu/vim-which-key'
+        " Plug 'neoclide/coc.nvim'     " new completion
+        Plug 'vim-scripts/AutoComplPop'  " https://www.youtube.com/watch?v=2f8h45YR494
     call plug#end()
 endif
 
@@ -998,8 +1044,8 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 
 let g:deoplete#enable_at_startup = 1
-hi  HighlightedyankRegion cterm=reverse gui=reverse
-map          <Space><Space>  <Plug>(easymotion-bd-f)
+hi HighlightedyankRegion cterm=reverse gui=reverse
+map          <Space><Space>         <Plug>(easymotion-overwin-f)
 nnoremap     <Space>C        :let g:screen_offset=!g:screen_offset<CR>:echo "g:screen_offset: " . string(g:screen_offset)<CR>
 nnoremap     <Space>ZZ       :Goyo <bar> Goyo 100%x100% <bar> let g:zen_mode=!g:zen_mode <bar> call GuiWindowFullScreen(1) <bar> echom "g:zen_mode: " . g:zen_mode<CR>
 nnoremap     <Space>ZX       :Goyo <bar> echom "g:zen_mode: " . g:zen_mode<CR>
@@ -1054,10 +1100,50 @@ nnoremap <silent> gv  :silent !start bin\\kitty_portable -ssh root@rvl-pv-ply-ub
 nnoremap <silent> gs  :silent !start /max c:\\Progra~1\\Git\\git-bash.exe<cr>
 nnoremap  gq      q
 nnoremap ,of          :%s//'/g
-nnoremap ,oc          :r !python \%userprofile\%\\fdf\\ocr.py<CR>:%s//'/g<CR>
+nnoremap ,oc          :r !python \%userprofile\%\\df\\ocr.py<CR>:%s//'/g<CR>
 
-" source ~/fdf/fayevimrc
-"Gstatus
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
+
+hi ActiveWindow            guibg=black     ctermbg=white
+hi InactiveWindow          guibg=gray9     ctermbg=grey
+
+" asus monitor
+nnoremap sba       :hi InactiveWindow          guibg=gray9     ctermbg=grey<CR>
+" dell 7400 laptop screen
+nnoremap sbd       :hi InactiveWindow          guibg=gray12    ctermbg=grey<CR>
+
+" function! SetDiffEnviron()
+"   set diff
+"   set scrollbind
+"   set scrollopt=ver,jump,hor
+"   set nowrap
+"   set fdm=diff
+" endfunction
+" :command! SetDiffEnviron call SetDiffEnviron()
+
+" if &diff
+"     colorscheme gruvbox
+" endif
+
+hi DiffAdd      ctermfg=NONE          ctermbg=Green  guifg=darkgreen    guibg=gray80
+hi DiffChange   ctermfg=NONE          ctermbg=NONE   guifg=darkorange4  guibg=gray80
+hi DiffDelete   ctermfg=LightBlue     ctermbg=Red    guifg=darkred       guibg=black
+hi DiffText     ctermfg=Yellow        ctermbg=Red    guifg=yellow3      guibg=black
+" augroup BgHighlight
+"     autocmd!
+"     autocmd WinEnter * hi normal guibg=black
+"     autocmd WinLeave * hi normal guibg=gray10
+" augroup END" func MyHandler(timer)
+
+" func MyHandler(timer)
+"   silent exec "! cmd /c time /t >> time.out"
+" endfunc
+" let timer = timer_start(120000, 'MyHandler', {'repeat': -1})
+
 
 " Test area:
    "in quotes"

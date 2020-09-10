@@ -1,18 +1,33 @@
-"~/fdf/vimrc - BEGIN
+" ~/df/"<M-h>l ~/df/vimrc - BEGIN
 " NOTE: Vim fold commands: zr - unfold / zm - fold
 
 " let/set {{{
+let g:dotfile = "fdf"         " location of dotfile folder from home folder 
+execute "let g:plug_vim_path=\"~/" . g:dotfile . "/nvim/plug.vim\""
+execute "let g:plug_vim_dir_path=\"~/" . g:dotfile . "/nvim/plugged\""
+let g:plug_vim_nvm_path="/mnt/nvm/users/ply/df/nvim/plug.vim"
+let g:plug_vim_nvm_dir_path="/mnt/nvm/users/ply/df/nvim/plugged"
+"    if filereadable(expand("~/df/nvim/plug.vim"))
 let mapleader=","
-let g:python3_host_prog = 'C:\Python38\python.EXE'
+let g:deoplete#enable_at_startup = 1
 let g:loaded_python_provider=0
 let g:EasyMotion_smartcase = 1
-let g:tagbar_ctags_bin = 'c:\Users\C50626\\bin\ctags.exe'
+" nnoremap ,oc          :r !python \%userprofile\%\\df\\ocr.py<CR>:%s//'/g<CR>
+" nnoremap n :execute "normal nzt" . g:line . "\<Down>\<CR>"
 
+" echom "line 16: " . $HOME . '/df/UltiSnips'
+let g:UltiSnipsSnippetDirectories=[$HOME.'/df/UltiSnips']
+" let g:UltiSnipsExpandTrigger="<M-j>"               
+let g:UltiSnipsExpandTrigger="<TAB>"               
+let g:UltiSnipsJumpForwardTrigger="<M-l>"
+let g:UltiSnipsJumpBackwardTrigger="<M-h>"
+" echom g:UltiSnipsSnippetDirectories
 " let g:UltiSnipsExpandTrigger='<Nop>'
 " let g:UltiSnipsJumpForwardTrigger = '<TAB>'
 " let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
 let g:coc_snippet_next = '<M-Right>'
 let g:coc_snippet_prev = '<M-Left>'
+let g:coc_force_debug = 1
 
 let g:center_screen = 1   " <Space>C to goggle
 let g:smooth_scroll = 0   " <Space>S to toggle
@@ -24,17 +39,26 @@ let g:superJK_scroll = "1"      " top is default is 25
 let g:screen_offset = 1.0/4.0 " 25%
 " let g:screen_offset = 0
 
+if has('win32') || has('win64')
+    let g:python3_host_prog = 'C:\Program Files\Python38\python.exe'
+else
+    let g:python3_host_prog = '/usr/bin/python3'
+endif
+
 set autochdir  " auto change directory to current file
 set cindent
 set cursorline
 set foldmethod=marker   " zm/zr - fold/unfold
 set foldmarker={{{,}}}
+" set ff=dos
+" set ffs=dos,unix
 set clipboard+=unnamedplus " need for copying and pasting from windows clipboard
 set expandtab      " On pressing tab, insert 4 spaces
 set hidden
 set inccommand=split
 set incsearch
 set hlsearch
+set noswapfile
 set number
 set pyx=3
 set viminfo='30  " limit old files to 20
@@ -86,16 +110,17 @@ nnoremap <leader>bp   :bprev!<cr>
 nnoremap <leader>bh   :bprev!<cr>
 nnoremap <leader>dw   diw
 nnoremap <leader>ec  :edit!   c:/<cr>
-nnoremap <leader>eb  :edit!   ~/fdf/ExecutorBuffer.java<cr>
-nnoremap <leader>ee  :edit!   ~/fdf/eQWERTY.ahk<cr>
-nnoremap <leader>eg  :edit!   ~/fdf/nvim/ginit.vim<cr>
-nnoremap <leader>ei  :edit!   ~/fdf/.gitignore<cr>
+execute "nnoremap <leader>eb  :edit!   ~/" . g:dotfile . "/ExecutorBuffer.java<cr>"
+execute "nnoremap <leader>ee  :edit!   ~/" . g:dotfile . "/eQWERTY.ahk<cr>"
+execute "nnoremap <leader>eg  :edit!   ~/" . g:dotfile . "/nvim/ginit.vim<cr>"
+execute "nnoremap <leader>ei  :edit!   ~/" . g:dotfile . "/.gitignore<cr>"
+nnoremap <leader>ej  :edit!   ~\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
 nnoremap <leader>el  :edit!   c:/sandbox/MTR/Libraries<cr>
-nnoremap <leader>ep  :edit!   ~/fdf/profile.ps1<cr>
+execute "nnoremap <leader>ep  :edit!   ~/" . g:dotfile . "/profile.ps1<cr>"
 nnoremap <leader>es  :edit!   ~/src/<cr>
-nnoremap <leader>et  :edit!   ~/fdf/tap.ahk<cr>
-nnoremap <leader>ev  :edit!   ~/fdf/vimrc<cr>
-nnoremap <leader>v   :edit!   ~/fdf/vimrc<cr>
+execute "nnoremap <leader>et  :edit!   ~/" . g:dotfile . "/tap.ahk<cr>"
+execute "nnoremap <leader>ev  :edit!   ~/" . g:dotfile . "/vimrc<cr>"
+execute "nnoremap <leader>v   :edit!   ~/" . g:dotfile . "/vimrc<cr>"
 nnoremap <leader>ex  :exe getline(line('.'))<cr>
 nnoremap <leader>os  :silent ! cmd /c start  ..\AppData\Local\nvim-data\swap<cr>
 nnoremap <leader>of  :silent ! start %<cr>
@@ -104,16 +129,16 @@ nnoremap <leader>ft  :set ft=
 nnoremap <leader>h   :noh<cr>
 nnoremap <leader>j   :jumps<cr>
 nnoremap <leader>k   :48vs ergolaptop<cr>:set nonumber<cr><c-w>h
-nnoremap <leader>l   :source ~/df/nvim/session.vim<cr>
+execute "nnoremap <leader>l   :source ~/" . g:dotfile . "/nvim/session.vim<cr>"
 nnoremap <leader>m   :marks<cr>
 nnoremap <leader>pi  :PlugInstall<cr>
 nnoremap <leader>q   :quit!<cr>
-nnoremap <leader>ef  :edit ~/fdf/fayevimrc<cr>
-nnoremap <leader>sf  :source ~/fdf/fayevimrc<cr>
+execute "nnoremap <leader>ef  :edit ~/" . g:dotfile "/fayevimrc<cr>"
+execute "nnoremap <leader>sf  :source ~/" . g:dotfile "/fayevimrc<cr>"
 nnoremap <leader>st  vip:sort<cr>
-nnoremap <leader>sv  :source ~/fdf/vimrc<cr>
-nnoremap <leader>sg  :source ~/fdf/nvim/ginit.vim<cr>
-nnoremap <leader>ss  :w<cr>:source ~/fdf/vimrc<cr>:source ~/fdf/nvim/ginit.vim<cr>
+execute "nnoremap <leader>sv  :source ~/" . g:dotfile . "/vimrc<cr>"
+execute "nnoremap <leader>sg  :source ~/" . g:dotfile . "/nvim/ginit.vim<cr>"
+execute "nnoremap <leader>ss  :w<cr>:source ~/" . g:dotfile . "/vimrc<cr>:source " . g:dotfile . "/nvim/ginit.vim<cr>"
 nnoremap <leader>t   :vsplit<cr>:set nonumber<cr>:terminal bash<cr>i
 nnoremap <leader>w   :w<cr>
 nnoremap <leader>z   :color zellner<cr>
@@ -138,10 +163,10 @@ nnoremap <c-i> <c-o>
 nnoremap <c-o> <c-i>
 " nnoremap n nzz7<C-e>
 " nnoremap N Nzz7<C-e>
-" nnoremap * *zz7<C-e>
-" nnoremap # #zz7<C-e>
-" nnoremap g* g*zz7<C-e>
-" nnoremap g# g#zz7<C-e>
+nnoremap * *zz7<C-e>
+nnoremap # #zz7<C-e>
+nnoremap g* g*zz7<C-e>
+nnoremap g# g#zz7<C-e>
 
 " change from 1 slash to 2 slashes
 nnoremap \\   :!
@@ -172,11 +197,11 @@ nnoremap   gbh         :bprev!<cr>
 nnoremap   gbl         :bnext!<cr>
 nnoremap   gcl         :set cursorline!<cr>
 nnoremap   gdc         :edit ~/Documents<cr>
-nnoremap   gdf         :edit ~/fdf<cr>
+execute "nnoremap   gdf         :edit " . g:dotfile . "<cr>"
 nnoremap   gdl         :edit ~/Downloads<cr>
 nnoremap   ged         :call NavigateLeftHanded()<cr>
 nnoremap   gh          :noh<cr>
-"nnoremap   gi          mZgg=G`Z                           " global indent
+nnoremap   gi          ==
 " nnoremap   gk	       :w<CR>>:<UP><CR>
 nnoremap   gnl         :call NavigateLeftHanded()<cr>
 nnoremap   go          :browse oldfiles<cr>
@@ -196,7 +221,7 @@ nnoremap   g.          :edit! .<cr>
 
 " copy and paste at local location
 " nnoremap     <leader>v       my:echo "highlight text, then press 'v' to paste at this location."<cr>
-vnoremap   v            y`YP
+" vnoremap   v            y`YP
 vnoremap   yy           Y
 
 " swap ; with :
@@ -222,9 +247,27 @@ nnoremap   F            <Nop>
 nnoremap   f            <Nop>
 nnoremap   fl           f
 nnoremap   fh           F
-nnoremap   FF	        :CtrlP<cr>
+nnoremap   ff           ;
+nnoremap   FE.          :Fern .<CR>
+nnoremap   FE           :Fern 
+execute "nnoremap   FEd          :Fern ~/" . g:dotfile . "<CR>"
+nnoremap   FED          :Fern ~/Downloads<CR>
+nnoremap   FEh          :Fern ~<CR>
+nnoremap   FEr          :Fern c:\<CR>
+nnoremap   FEs          :Fern c:\Sandbox<CR>
+nnoremap   FB           :Buffers<CR>
+nnoremap   FF           :Files<Space>
+nnoremap   FF.          :Files .<CR>
+nnoremap   FFr          :Files c:\<CR>
+nnoremap   FFs          :Files c:\Sandbox<CR>
+nnoremap   FFh          :Files ~<CR>
+nnoremap   FG           :GFiles<Space>
+nnoremap   FG.          :GFiles .<CR>
+execute "nnoremap   FGd          :GFiles ~/" . g:dotfile . "<CR>"
+nnoremap   FGh          :GFiles ~<CR>
+nnoremap   FGs          :GFiles c:\Sandbox<CR>
+
 nnoremap   FS	        :let g:full_screen=!g:full_screen <bar> call GuiWindowFullScreen(g:full_screen) <bar> echom "fullscreen toggled"<CR> 
-nnoremap   fs           :let g:full_screen=!g:full_screen <bar> call GuiWindowFullScreen(g:full_screen) <bar> echom "fullscreen toggled"<CR> 
 
 " G mappings
 nnoremap   G            <Nop>
@@ -236,21 +279,20 @@ nnoremap   Ga5         :w<cr>:G add %<cr>
 nnoremap   Gc          :Gcommit -m ""<Left>
 nnoremap   G5          :w<cr>:G add %<cr>:Gcommit -m ""<Left>
 nnoremap   Gd	       :Gdiff<cr>
-nnoremap   G_down      <Down>
-nnoremap   G_up        <Up>
-nnoremap   Gh	       :Gpush<cr>:Gstatus<cr>
-nnoremap   Gl	       :Gpull<cr>:Gstatus<cr>
-nnoremap   G_pagedown  <PageDown>
-nnoremap   G_pageup    <PageUp>
+" nnoremap   Gh	       :Gpush<cr>:Gstatus<cr>
+" nnoremap   Gl	       :Gpull<cr>:Gstatus<cr>
+nnoremap   Gh          :Dispatch! git push<cr>
+nnoremap   silent GH   :silent !git push "https://pcssolutions:Kao95843@github.com/pcssolutions/df.git" master &<cr>
+nnoremap   Gl          :Dispatch! git pull<cr>
 nnoremap   gy          :Goyo 100%<cr>
-nnoremap   g9          {:<C-u>call search('^.\+')<cr>
 nnoremap   g)          }k
-nnoremap   gbh         :bp<cr>
-nnoremap   gbl         :bn<cr>
-nnoremap   gbd         :bd<cr>
+
+nnoremap   gb          :buffer! #<cr>
+" nnoremap   gbh         :bp<cr>
+" nnoremap   gbl         :bn<cr>
+" nnoremap   gbd         :bd<cr>
 nnoremap   Gr          :Grep \<<C-r><C-w>\><CR>
 nnoremap   Gs	       :Gstatus<cr>
-nnoremap   GS          :call Google()<CR>
 map        Gj          <Plug>(GitGutterNextHunk)zz
 map        Gk          <Plug>(GitGutterPrevHunk)zz
 
@@ -263,8 +305,7 @@ nnoremap   MM           M
 nnoremap   ML           ml
 nnoremap   Ms           m
 nnoremap   m            `
-nnoremap   m            `
-nnoremap   `            m
+nnoremap   `            m"
 
 " s mappings
 map        s2           <Plug>(easymotion-overwin-f2)
@@ -272,8 +313,25 @@ inoremap   <C-e>        <C-o>:<Plug>(easymotion-overwin-f2)<CR>
 nnoremap   S            <Nop>
 nnoremap   SF           :Startify<cr>
 nnoremap   SS           S
-nnoremap   ST           :silent !start pythonw c:\users\fly\src\timerpy\timer.py<cr>
 nnoremap   SW           :w<cr>:source %<cr>
+if has('win32') || has('win64')
+    " cmdkey /generic:TERMSRV/10.182.66.54 /user:connvm06 /pass:nvm*
+    " mstsc /v:10.182.66.54 /w:1200 /h:800 /user:connvm06
+    nnoremap <silent> S3    :silent !start mstsc /v:10.182.64.45 /w:1280 /h:720<cr>
+    nnoremap <silent> S6    :silent !start mstsc /v:10.182.66.54 /w:1280 /h:720<cr>
+    nnoremap <silent> S9    :silent !start \%userprofile\%\\df\\bin\\kitty_portable -ssh root@ly95843.ddns.net<cr>
+    nnoremap <silent> Sv    :silent !start \%userprofile\%\\df\\bin\\kitty_portable  -pw aa -ssh root@rvl-pv-ply-ub1804vm.rvl.mscc.lab<cr>
+    nnoremap <silent> Sl    :silent !start \%userprofile\%\\df\\\\bin\\kitty_portable -pw aa -ssh ply@localhost<cr>
+    nnoremap <silent> Sb    :silent !start /max c:\\Progra~1\\Git\\git-bash.exe<cr>
+else
+    " inside MS WSL
+    nnoremap <silent> S3    :silent !/mnt/c/Windows/System32/mstsc.exe /v:10.182.64.45 /w:1280 /h:720 &<cr>
+    nnoremap <silent> S6    :silent !/mnt/c/Windows/System32/mstsc.exe /v:10.182.66.54 /w:1280 /h:720 &<cr>
+    nnoremap <silent> S9    :silent !/mnt/c/Users/C50626/df/bin/kitty_portable.exe -ssh root@ly95843.ddns.net &<cr>
+    nnoremap <silent> Sv    :silent !/mnt/c/Users/C50626/df/bin/kitty_portable.exe -ssh root@rvl-pv-ply-ub1804vm.rvl.mscc.lab &<cr>
+    nnoremap <silent> Sl    :silent !/mnt/c/Users/C50626/df/bin/kitty_portable.exe -pw aa -ssh ply@localhost &<cr>
+    nnoremap <silent> Sb    :silent !start /max c:\\Progra~1\\Git\\git-bash.exe<cr>
+endif
 nnoremap   s            <Nop>
 nnoremap   s=           <C-w>=
 nnoremap   sH 	        :vertical resize -5<cr>
@@ -283,42 +341,57 @@ nnoremap   sL 	        :vertical resize +5<cr>
 nnoremap   sN           :new<cr>
 nnoremap   sS           :split<cr>
 nnoremap   sb           ?
-nnoremap   sf           /
+nnoremap   sB           ?BM<CR>
 nnoremap   sdg          :diffget<CR>
 vnoremap   sdg          :diffget<CR>
 nnoremap   sdk          [czz
 nnoremap   sdj          ]czz
+nnoremap   sdo          :diffoff<CR>
 nnoremap   sdp          :diffput<CR>
 vnoremap   sdp          :diffput<CR>
+nnoremap   sdt          :diffthis<CR>
 nnoremap   sdu          :diffupdate<CR>
-     map   fn           <Plug>(easymotion-next)
+nnoremap   sf           /
 nnoremap   sh           <C-w>h
 nnoremap   sj           <C-w>j
 nnoremap   sk           <C-w>k
 nnoremap   sl           <C-w>l
 nnoremap   sn           :vnew<cr>
+nnoremap   so           <C-w>o
 nnoremap   sq           :call QuitIfNotLastWindow()<cr>
 nnoremap   ss           :vsplit<cr>
+if has('win32') || has('win64')
+    nnoremap   st           :vsplit<cr>:set nonumber<cr>:terminal powershell<cr>i
+else
+    nnoremap   st           :vsplit<cr>:set nonumber<cr>:terminal bash<cr>i
+endif
 nnoremap   sr           :%s/\<<C-r><C-w>\>/<C-r><C-w>/g<Left><Left>
 nnoremap   svn          :new<cr>
 nnoremap   svd          :vertical diffsplit<Space>
 nnoremap   sw           *
 nnoremap   sz           :ZoomToggle<cr>
- 
+
+" Hilights recently pasted and indenting recent pasted
+nnoremap   sp `[v`]
+nnoremap   s, `[v`]<<
+nnoremap   s. `[v`]>>
+
 " t mappings
 nnoremap   tb          :TagbarToggle<cr>
 nnoremap   t           *<C-]>wwzz
 nnoremap   tt          *<C-]>wwzz
 nnoremap   tl          #*:vsp<cr>:exec("tag ".expand("<cword>"))<cr>ww
 nnoremap   tj          #*:sp <cr>:exec("tag ".expand("<cword>"))<cr>ww
-nnoremap   tcl         :silent !.\bin\ctags -R --language-force=java -f tags.java C:\sandbox\MTR\Libraries\*.bsh<cr>
+" nnoremap   tcl         :silent !\%userprofile\%\\df\\bin\\ctags -R --language-force=java -f \%userprofile\%\\df\\tags.java C:\\sandbox\\*.bsh<cr>
+" nnoremap   tcl          !\%userprofile\%\\df\\bin\\ctags -R --language-force=java -f \%userprofile\%\\df\\tags.java C:\\sandbox\\*.bsh<cr>
+execute "nnoremap   tcl          !\%userprofile\%\\" . g:dotfile . "\\bin\\ctags -R -f \%userprofile\%\\" . g:dotfile . "\\tags.java C:\\sandbox<cr>"
 nnoremap   tc.         :!.\bin\ctags --recurse=yes --append<cr>
 nnoremap   TT          zt3<C-y>
 nnoremap   TS          :call Thesaurus()<CR>
 nnoremap   To          zt <bar> let offset = string(float2nr(winheight('%') * g:center_screen_offset)) <bar> echo offset 
 
-nnoremap   gb          :echo "; does the same"<cr>`Bzz
-"nnoremap   gm	       `mzz
+" nnoremap   gb          :echo "; does the same"<cr>`Bzz
+" nnoremap   gm	       `mzz
 
 nnoremap   <Enter>         zx
 nnoremap   <BS>            <right>x<left>
@@ -356,13 +429,13 @@ cnoremap   <M-k>       <Up>
 inoremap   <M-v>       <C-r>+
 
 " inoremap   <C-v>       <C-r>*
-inoremap   jk      l    <Esc>
+inoremap   jk          <Esc>
 inoremap   kk          <Esc>
 inoremap   kl          <Esc>
 vnoremap   <C-c>       "+y
 " C-Space (ctrl-space)
-inoremap   <C-BS>      <C-w>
-nnoremap   <C-BS>      bdaW
+inoremap  <C-BS>       <C-w>
+nnoremap  <C-BS>       bdaW
 inoremap  <M-j>        <C-n>
 inoremap  <M-k>        <C-p>
 inoremap  <M-h>        <C-k>
@@ -373,6 +446,11 @@ nnoremap   <M-k>       <C-y>k
 
 nnoremap   <Down>      <C-e>j
 nnoremap   <Up>        <C-y>k
+nnoremap   g<Down>     <Down>
+nnoremap   g<Up>       <Up>
+nnoremap   g<Left>     <Left>
+nnoremap   g<Right>    <Right>
+
 " nnoremap   <M-h>       <C-w>h
 " nnoremap   <M-j>       <C-w>j
 " nnoremap   <M-k>       <C-w>k
@@ -388,7 +466,7 @@ nnoremap   <silent> l            :call NextParagraph()<CR>
 nnoremap   +                  J
 " nnoremap   <A-S> 	          :new<cr>
 nnoremap   <A-a> 	          za
-nnoremap   <A-f> 	          vip:fold<cr>
+" nnoremap   <A-f> 	          vip:fold<cr>
 " nnoremap   <A-h> 	          <C-w>h
 " nnoremap   <A-l> 	          <C-w>l
 " nnoremap   <A-s> 	          :vnew<cr>
@@ -440,7 +518,6 @@ nnoremap   cw	              ciw
 " nnoremap   gp	              <C-o>]p
 " nnoremap   gp                 :vsplit<cr>:set nonumber<cr>:terminal powershell -executionpolicy bypass<cr>i
 nnoremap   gu                 :vsplit<cr>:set nonumber<cr>:terminal ubuntu1804<cr>i
-nnoremap   gv                 :silent !start bin\\kitty_portable -ssh root@rvl-pv-ply-ub1804vm.rvl.mscc.lab -pw ff<cr>
 nnoremap   q 	              :call QuitIfNotLastWindow()<cr>
 
 " nnoremap   j                  :call PageDown()<cr>
@@ -508,6 +585,21 @@ function! NavigateLeftHanded()
     endif
 endfunction
 
+nnoremap H  :call BackHistory()<cr>
+nnoremap L  :call NextHistory()<cr>
+
+function! NextHistory()
+    echom "NextHistory"
+    execute "normal \<C-o>"
+    call QuaterCenter()
+endfu
+
+function! BackHistory()
+    echom "BackHistory"
+    execute "normal \<C-i>"
+    call QuaterCenter()
+endfunction
+
 function! ExecutorBufferPush()
     " Save cursor position to Reg E
     execute "normal mE"
@@ -527,6 +619,7 @@ function! ExecutorBufferPush()
 endfunction
 
 function! PrevParagraph()
+    let start_line = line('.')
     execute "normal {{"
     if (line('.') == 1 )
         " echo "top reached, return"
@@ -535,15 +628,19 @@ function! PrevParagraph()
     "execute "normal \<Down>"
     if (g:screen_offset != 0)
         let offset = string(float2nr(winheight('%') * g:screen_offset))
-        echo offset
+        " echo 'DEBUG: PrevParagraph(): ' . offset
         if (line('.') > offset * 2 )
-            execute "normal zz"
-            execute "normal " . offset . "\<C-e>" . "\<Down>"
+            "execute "normal zz"
+            "execute "normal zz" . offset . "\<C-e>" . "\<Down>"
+            execute "normal zt" . offset . "\<C-y>" . "\<Down>"
         else
             " execute "normal gg"
             execute "normal " . offset . "\<C-y>"
         endif
     endif 
+    let end_line = line('.')
+    let diff_line = start_line - end_line   " - start_line
+    echo "Prev Paragraph: " . diff_line . " lines up"
 endfunction
 
 function! SS()
@@ -556,65 +653,90 @@ command! SS         :call SS()
 let g:save_line = 0
 function! NextParagraphSS()
     " if (g:smooth_scroll == 1)
-        let g:save_line = line('.')
-        execute "normal! MS}"
-        call search('^.\+')
-        let g:current_line = line('.') 
-        " execute "normal! `S}"
-        let g:scroll = g:current_line - g:save_line
-        echo "current_line: " . g:current_line
-        " call smooth_scroll#up(scroll, 5, 1)
-        execute "normal! " . g:scroll . "\<Up>"
-        let i = 1
-        while i <= g:scroll
-            execute "normal! \<C-e>"
-            redraw
-            sleep 10ms
-            let i = i + 1
-        endwhile
+    let g:save_line = line('.')
+    execute "normal! MS}"
+    call search('^.\+')
+    let g:current_line = line('.') 
+    " execute "normal! `S}"
+    let g:scroll = g:current_line - g:save_line
+    echo "current_line: " . g:current_line
+    " call smooth_scroll#up(scroll, 5, 1)
+    execute "normal! " . g:scroll . "\<Up>"
+    let i = 1
+    while i <= g:scroll
+        execute "normal! \<C-e>"
+        redraw
+        sleep 10ms
+        let i = i + 1
+    endwhile
 endfunction
 
 function! NextParagraph()
+    let start_line = line('.')
     execute "normal }"
     call search('^.\+')
     if (g:screen_offset != 0)
         let offset = string(float2nr(winheight('%') * g:screen_offset)) 
         if(line('.') > offset * 2)
-            " echo offset
-            execute "normal zz" . offset . "\<C-e>"
+            set nocursorline  " fix ghosting cursorline line
+            " echo 'DEBUG: NextParagraph(): ' . offset
+            execute "normal zt" . offset . "\<C-y>"
+            set cursorline
         endif
     endif 
+    let end_line = line('.')
+    let diff_line = end_line - start_line  " - start_line
+    echo "Next Paragraph: " . diff_line . " lines down"
 endfunction
 
-" Page down / smooth
-
-function! PageDown()
-    let top_line = string(float2nr(winheight('%') * g:screen_offset)) + 1
+function! QuaterCenter()
+    let top_line = string(float2nr(winheight('%') * g:screen_offset))
     "if (line('.') > offset * 2 )
     "let top_line = 10
     if (g:smooth_scroll == 1)
         execute "normal! H" . top_line. "\<Down>"
         call smooth_scroll#down(winheight('%'), 5, 1)
     else
-        echo 'DEBUG: PageDown() ' . top_line
-        execute "normal! \<Pagedown>2\<C-e>"
-        execute "normal! H" . top_line. "\<Down>"
+        " echo 'DEBUG: QuaterCenter() ' . top_line
+        execute "normal! zt" . top_line . "\<C-y>"
         return
     endif
 endfunction
 
-function! PageUp()
+" Page down / smooth
+
+function! PageDown()
+    let start_line = line('.')
+    let top_line = string(float2nr(winheight('%') * g:screen_offset))
+    " if (line('.') > offset * 2 )
+    " echo start_line
     "let top_line = 10
-    let top_line = string(float2nr(winheight('%') * g:screen_offset)) + 1
+    if (g:smooth_scroll == 1)
+        execute "normal! H" . top_line. "\<Down>"
+        call smooth_scroll#down(winheight('%'), 5, 1)
+    else
+        execute "normal! \<Pagedown>2\<C-e>"
+        execute "normal! H" . top_line . "\<Down>"
+    endif
+    let end_line = line('.')
+    let diff_line = end_line - start_line
+    echo "Page Down: " . diff_line . " lines down"
+endfunction
+
+function! PageUp()
+    let start_line = line('.')
+    let top_line = string(float2nr(winheight('%') * g:screen_offset))
     if (g:smooth_scroll == 1)
         execute "normal! H" . top_line. "\<Down>"
         call smooth_scroll#up(winheight('%'), 5, 1)
     else
-        echo 'DEBUG: PageUp() ' . top_line
+        " echo 'DEBUG: PageUp() ' . top_line
         execute "normal! \<Pageup>2\<C-y>"
         execute "normal! H" . top_line. "\<Down>"
-        return
     endif
+    let end_line = line('.')
+    let diff_line =  start_line - end_line
+    echo "Page Up: " . diff_line . " lines up"
 endfunction
 
 function! OffsetCenter ()
@@ -692,9 +814,9 @@ function! SimulateScroll()
         execute "normal \<C-e>"
         " let ifloat = i * 1.0
         " let sleep_time = float2nr( 1 + ifloat * (ifloat / winheight) / 10)
-        execute "sleep " . float2nr( 2 + i * (i / 10.0 ) . "ms"
+        execute "sleep " . float2nr( 2 + i * (i / 10.0 )) . "ms"
         " sleep 20ms
-        echo    "sleep " . float2nr( 2 + i * (i / 10.0 ) . "ms"
+        " echo    "sleep " . float2nr( 2 + i * (i / 10.0 )) . "ms"
         " sleep 10ms
         redraw
         let i = i + 1
@@ -702,8 +824,7 @@ function! SimulateScroll()
     " echo "simulatescroll " . string(winheight) . " lines"
 endfunction
 
-" this clue good http://news.com 
-vnoremap gs <esc>:call WebSearchSelected()<CR>
+vnoremap s <esc>:call WebSearchSelected()<CR>  " 'fudesign2008/websearch.vim'
 
 nnoremap <leader>T :call Thesaurus()<CR>
 function! Thesaurus()
@@ -731,9 +852,10 @@ nmap <leader>j :call GotoJump()<cr>
 
 " autocmd {{{
 autocmd BufEnter *.bsh :set filetype=java
+autocmd BufEnter *.bsh :set ff=dos
 autocmd VimLeave * call SaveSess()
 autocmd BufEnter term://* startinsert
-autocmd FileType java set tags=~/fdf/tags.java
+autocmd FileType java set tags=~/df/tags.java
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 " autocmd VimEnter * call RestoreSess()
@@ -749,12 +871,14 @@ autocmd! User GoyoLeave Limelight!
 
 " Hilights {{{
 hi EasyMotionTarget        ctermbg=none ctermfg=green   gui=bold guifg=purple
-hi EasyMotionTarget2First  cterm=bold   ctermfg=40      gui=bold guifg=#7fbf00 " purple inverse
+hi EasyMotionTarget        ctermbg=none ctermfg=green            guifg=purple     guibg=black
+hi EasyMotionTarget2First  cterm=bold   ctermfg=40      gui=bold guifg=#7fbf00 "  guibg=whte purple inverse
+hi EasyMotionTarget2First  cterm=bold   ctermfg=40      gui=bold guifg=Cyan    " purple inverse
 hi EasyMotionTarget2Second cterm=bold   ctermfg=40      gui=bold guifg=#7fbf00 " purple inverse
 
-hi Visual              gui=bold      guibg=grey25
-hi ActiveWindow        guibg=white ctermbg=white
-hi InactiveWindow      guibg=grey10 ctermbg=grey
+" hi Visual              guibg=white
+" hi ActiveWindow        guibg=white ctermbg=white
+" hi InactiveWindow      guibg=grey10 ctermbg=grey
 if has('nvim')
     set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
 endif
@@ -763,18 +887,8 @@ endif
 " host specific code {{{
 let hostname = substitute(system('hostname'), '\n', '', '')
 
-if hostname == "ASUS_DESKTOP"
-    source ~/fdf/nvim/shady.vim   " Light vim color theme
-    colorscheme edar
-    hi ActiveWindow            guibg=black    ctermbg=white
-    hi InactiveWindow          guibg=gray205  ctermbg=grey
-    " nnoremap <leader>n :Guifont! Hack Nerd Font Mono:15h:l<cr>
-    echom "hostname: " . hostname
-endif
-
-if hostname == "CAR-LT-C50626B"  " Work Setup. configured to be in light mode, then inverted.
+if hostname == "CAR-LT-C50627"  " Work Setup. configured to be in light mode, then inverted.
     let g:airline_theme='sol'    " Light mode
-    source ~/fdf/nvim/vadelma.vim   " Light vim color theme
     hi MsgArea                 guibg=lightgray guifg=purple ctermbg=white 
     hi Keyword                 guibg=clear     guifg=Blue   ctermbg=white 
     hi Comment                 guibg=clear     guifg=Green  ctermbg=white 
@@ -785,10 +899,10 @@ if hostname == "CAR-LT-C50626B"  " Work Setup. configured to be in light mode, t
     hi ActiveWindow            guibg=white     ctermbg=white
     hi InactiveWindow          guibg=lightgray ctermbg=grey
 
-    hi EasyMotionTarget2First  cterm=bold      ctermfg=40     gui=bold guifg=green
-    hi EasyMotionTarget2Second cterm=bold      ctermfg=40     gui=bold guifg=green
-    hi EasyMotionTarget        ctermbg=none    ctermfg=green  gui=bold guifg=purple
-    hi Folded                  ctermbg=grey    guifg=clear    guibg=#dddddd
+    " hi EasyMotionTarget2First  cterm=bold      ctermfg=40     gui=bold guifg=green
+    " hi EasyMotionTarget2Second cterm=bold      ctermfg=40     gui=bold guifg=green
+    " hi EasyMotionTarget        ctermbg=none    ctermfg=green  gui=bold guifg=purple
+    hi Folded                  ctermbg=darkyellow   guifg=clear    guibg=#dddddd
     hi ActiveWindow            guibg=black    ctermbg=white
     hi InactiveWindow          guibg=gray205  ctermbg=grey
     "hi CursorLine              ctermbg=grey    guifg=clear    guibg=lightgray
@@ -801,8 +915,8 @@ if hostname == "CAR-LT-C50626B"  " Work Setup. configured to be in light mode, t
     " nnoremap <leader>ct  !%:p:h/nvim/session.vim//bin/ctags -V -f tags --language-force=java -R C:\sandbox\MTR\Libraries\*.bsh<cr>
     nnoremap <leader>ct  :silent !c:\Users\C50626\\bin\ctags -V -f tags --language-force=java -R C:\sandbox\MTR\Libraries\*.bsh<cr>
 
-    source ~/fdf/nvim/plug.vim    " call directly instead of using "autoload" directory
-    echo "759 Plug.vim: loading for host " . hostname
+    source ~/df/nvim/plug.vim    " call directly instead of using "autoload" directory
+    "echo "759 Plug.vim: loading for host " . hostname
     call plug#begin('~/df/nvim/plugged')
     Plug 'bling/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -834,7 +948,7 @@ if hostname == "CAR-LT-C50626B"  " Work Setup. configured to be in light mode, t
     " Plug 'nvim-lua/completion-nvim'
     " Plug 'neovim/nvim-lsp'
     Plug 'vim-scripts/AutoComplPop'  " https://www.youtube.com/watch?v=2f8h45YR494
-    Plug 'reedes/vim-pencil'
+    " Plug 'reedes/vim-pencil'
     Plug 'beloglazov/vim-online-thesaurus'
     Plug 'fudesign2008/websearch.vim'
     Plug 'morhetz/gruvbox'
@@ -843,7 +957,7 @@ if hostname == "CAR-LT-C50626B"  " Work Setup. configured to be in light mode, t
     "Plug 'drzel/vim-scroll-off-fraction'
     "Plug 'severin-lemaignan/vim-minimap'
     call plug#end()
-    echom "hostname: " . hostname
+    "echom "hostname: " . hostname
 
     " ExecutorBuffer Pull/Push
     inoremap <M-r>                <Esc>:call ExecutorBufferPush()<cr>
@@ -852,7 +966,7 @@ if hostname == "CAR-LT-C50626B"  " Work Setup. configured to be in light mode, t
     nnoremap <A-t>                <Esc>:edit! ExecutorBuffer.java<cr>:%d_<cr>:silent !ExecutorBufferPull.ahk<cr>
 
     " Plug 'mtdl9/vim-log-highlighting' settings
-    colorscheme default
+    " colorscheme default
     colorscheme gruvbox
     hi normal guibg=black
     hi normal ctermbg=black
@@ -860,176 +974,104 @@ if hostname == "CAR-LT-C50626B"  " Work Setup. configured to be in light mode, t
     hi jsonCommentError guifg=#928374 guibg=black
 endif 
 
-if hostname == "rvl-pv-ply-ub1804vm"  " VM at Microchip
-    colorscheme zellner
-    hi ActiveWindow            ctermbg=white
-    hi CursorLine              cterm=none       ctermbg=248
-    hi EasyMotionTarget        cterm=bold       ctermfg=black ctermbg=14
-    hi EasyMotionTarget2First  cterm=bold       ctermfg=black ctermbg=14
-    hi EasyMotionTarget2Second cterm=bold       ctermfg=black ctermbg=14
-    hi ErrorMsg                cterm=bold       ctermfg=red   ctermbg=grey
-    hi Folded                  ctermfg=black    ctermbg=7        
-    hi InactiveWindow          ctermbg=252
-    " map      <Space>     <Plug>(easymotion-bd-f)
-    " nnoremap <leader>ss  :w<cr>:source ~//vimrc<cr>
-    source ~/fdf/nvim/plug.vim    " call directly instead of using "autoload" directory
-    echo "814 Plug.vim: loading for host " . hostname
-    call plug#begin('~/fdf/nvim/plugged')
-        Plug 'bling/vim-airline'
-        Plug 'vim-airline/vim-airline-themes'
-        Plug 'easymotion/vim-easymotion'
-        Plug 'michaeljsmith/vim-indent-object'      " https://github.com/michaeljsmith/vim-indent-object
-        Plug 'tpope/vim-commentary'
-        Plug 'tpope/vim-fugitive'
-        Plug 'airblade/vim-gitgutter'
-        " Plug 'ryanoasis/vim-devicons'
-        " Plug 'kien/ctrlp.vim'                       " Fuzzy file finder / map to F
-        " Plug 'scrooloose/nerdtree'
-        " Plug 'yuttie/comfortable-motion.vim'        " Physic Motion
-        " Plug 'vim-scripts/matchit.zip'
-        " Plug 'vim-scripts/svn-diff.vim'
-        " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-        " Plug 'zchee/deoplete-jedi'
-        " Plug 'jiangmiao/auto-pairs'
-        " Plug 'machakann/vim-highlightedyank'
-    call plug#end()
-endif
-
-if hostname == "rvl-pv-vault"  " log server at MC
-    colorscheme zellner
-    hi ActiveWindow            ctermbg=white
-    hi CursorLine              cterm=none       ctermbg=248
-    hi EasyMotionTarget        cterm=bold       ctermfg=black ctermbg=14
-    hi EasyMotionTafrget2First  cterm=bold       ctermfg=black ctermbg=14
-    hi EasyMotionTarget2Second cterm=bold       ctermfg=black ctermbg=14
-    hi ErrorMsg                cterm=bold       ctermfg=red   ctermbg=grey
-    hi Folded                  ctermfg=black    ctermbg=7        
-    hi InactiveWindow          ctermbg=252
-    nnoremap <leader>ev  :edit!   /nvm/users/ply/fdf/vimrc<cr>
-    source /nvm/users/ply/fdf/nvim/plug.vim    " call directly instead of using "autoload" directory
-    echo "848 Plug.vim: loading for host " . hostname
-    call plug#begin('/nvm/users/ply/fdf/nvim/plugged')
-        Plug 'bling/vim-airline'
-        Plug 'vim-airline/vim-airline-themes'
-        Plug 'easymotion/vim-easymotion'
-        Plug 'michaeljsmith/vim-indent-object'      " https://github.com/michaeljsmith/vim-indent-object
-        Plug 'tpope/vim-commentary'
-        Plug 'tpope/vim-fugitive'
-        Plug 'airblade/vim-gitgutter'
-        " Plug 'ryanoasis/vim-devicons'
-        " Plug 'kien/ctrlp.vim'                       " Fuzzy file finder / map to F
-        " Plug 'scrooloose/nerdtree'
-        " Plug 'yuttie/comfortable-motion.vim'        " Physic Motion
-        " Plug 'vim-scripts/matchit.zip'
-        " Plug 'vim-scripts/svn-diff.vim'
-        " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-        " Plug 'zchee/deoplete-jedi'
-        " Plug 'jiangmiao/auto-pairs'
-        " Plug 'machakann/vim-highlightedyank'
-    call plug#end()
-endif
-
-if hostname == "TC"  " text gateway
-    colorscheme zellner
-    hi ActiveWindow            ctermbg=white
-    hi CursorLine              cterm=none       ctermbg=248
-    hi EasyMotionTarget        cterm=bold       ctermfg=black ctermbg=14
-    hi EasyMotionTarget2First  cterm=bold       ctermfg=black ctermbg=14
-    hi EasyMotionTarget2Second cterm=bold       ctermfg=black ctermbg=14
-    hi ErrorMsg                cterm=bold       ctermfg=red   ctermbg=grey
-    hi Folded                  ctermfg=black    ctermbg=7        
-    hi InactiveWindow          ctermbg=252
-    map      <Space>     <Plug>(easymotion-bd-f)
-    source ~/df/nvim/plug.vim    " call directly instead of using "autoload" directory
-    echo "Plug.vim: loading for host " . hostname
-    call plug#begin('~/df/nvim/plugged')
-        Plug 'bling/vim-airline'
-        Plug 'vim-airline/vim-airline-themes'
-        Plug 'easymotion/vim-easymotion'
-        Plug 'michaeljsmith/vim-indent-object'      " https://github.com/michaeljsmith/vim-indent-object
-        Plug 'tpope/vim-commentary'
-        Plug 'tpope/vim-fugitive'
-        " Plug 'ryanoasis/vim-devicons'
-        " Plug 'kien/ctrlp.vim'                       " Fuzzy file finder / map to F
-        " Plug 'airblade/vim-gitgutter'
-        " Plug 'scrooloose/nerdtree'
-        " Plug 'yuttie/comfortable-motion.vim'        " Physic Motion
-        " Plug 'vim-scripts/matchit.zip'
-        " Plug 'vim-scripts/svn-diff.vim'
-        " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-        " Plug 'zchee/deoplete-jedi'
-        " Plug 'jiangmiao/auto-pairs'
-        " Plug 'machakann/vim-highlightedyank'
-    call plug#end()
-endif
-
-if hostname == "SurfacePro"
-    source ~/fdf/nvim/hyper.vim
-    " colorscheme edar
-    hi ActiveWindow            guibg=black    ctermbg=white
-    hi InactiveWindow          guibg=gray205  ctermbg=grey
-    echom "hostname: " . hostname
-endif
-
 "}}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Plug.vim {{{
+" Plug.vim bmpl {{{
 if !exists('g:loaded_plug')  " Only load if it hasn't been loaded.
-    source ~/fdf/nvim/plug.vim    " call directly instead of using "autoload" directory
-    "echo "919 Plug.vim: loading for host " . hostname
-    call plug#begin('~/fdf/nvim/plugged')
+    if filereadable(expand(g:plug_vim_path))
+        execute "source " . g:plug_vim_path
+        call plug#begin(g:plug_vim_dir_path)
+    elseif filereadable(g:plug_vim_nvm_path)
+        execute "source " . g:plug_vim_nvm_path"  " for nfs setup alias to v=vim -u /mnt/nvm/users/ply/df/vimrc
+        call plug#begin(g:plug_vim_nvm_dir_path)
+    endif
+    if hostname == "CAR-LT-C50626"  " Speed issues, limited plugin
+        " echom "Line 967: inside g:load_plug hostname == CAR-LT-C50626"
+        Plug 'easymotion/vim-easymotion'
+        Plug 'morhetz/gruvbox'
+        Plug 'machakann/vim-highlightedyank'
+        Plug 'tpope/vim-commentary'
+        Plug 'michaeljsmith/vim-indent-object'      " https://github.com/michaeljsmith/vim-indent-object
+        Plug 'airblade/vim-gitgutter'
+        Plug 'vim-scripts/AutoComplPop'  " https://www.youtube.com/watch?v=2f8h45YR494
+        Plug 'tpope/vim-fugitive'
+        Plug 'fudesign2008/websearch.vim' " vnoremap gs
+        Plug 'mhinz/vim-startify'
+        Plug 'tpope/vim-dispatch'
+        Plug 'junegunn/fzf'
+        Plug 'junegunn/fzf.vim'
+        Plug 'antoinemadec/FixCursorHold.nvim' " needed for fern
+        Plug 'lambdalisue/fern.vim'            " faster nerdtree
+        " Plug 'craigemery/vim-autotag'
+        " Plug 'yegappan/bufselect'
         Plug 'bling/vim-airline'
         Plug 'vim-airline/vim-airline-themes'
+        " Plug 'honza/vim-snippets'
+        " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+        Plug 'davidhalter/jedi'
+        Plug 'SirVer/ultisnips'
+        Plug 'scrooloose/nerdtree'
+        if has('win32') || has('win64')
+            " echom "line 993: non win32platform"
+            " Plug 'neoclide/coc.nvim', {'branch': 'release' }      " stable version
+        endif
+        " Plug 'grvcoelho/vim-javascript-snippets'
+        " BM
+    else
+        echom "Line 996: outside g:load_plug hostname == CAR-LT-C50626"
         Plug 'easymotion/vim-easymotion'
-        Plug 'michaeljsmith/vim-indent-object'      " https://github.com/michaeljsmith/vim-indent-object
+        Plug 'morhetz/gruvbox'
+        Plug 'machakann/vim-highlightedyank'
         Plug 'tpope/vim-commentary'
-        Plug 'tpope/vim-fugitive'
-        Plug 'ryanoasis/vim-devicons'
-        Plug 'kien/ctrlp.vim'                       " Fuzzy file finder / map to F
+        Plug 'michaeljsmith/vim-indent-object'      " https://github.com/michaeljsmith/vim-indent-object
         Plug 'airblade/vim-gitgutter'
+        Plug 'vim-scripts/AutoComplPop'  " https://www.youtube.com/watch?v=2f8h45YR494
+        Plug 'tpope/vim-fugitive'
+        Plug 'mhinz/vim-startify'
+        Plug 'tpope/vim-dispatch'
+        Plug 'junegunn/fzf'
+        Plug 'junegunn/fzf.vim'
+        Plug 'antoinemadec/FixCursorHold.nvim' " needed for fern
+        Plug 'lambdalisue/fern.vim'            " faster nerdtree
+        Plug 'honza/vim-snippets'
+        Plug 'neoclide/coc.nvim', {'branch': 'release' }      " stable version
+        Plug 'bling/vim-airline'
+        Plug 'vim-airline/vim-airline-themes'
+
+        " Plug 'bling/vim-airline'
+        " Plug 'vim-airline/vim-airline-themes'
+        " Plug 'kien/ctrlp.vim'                       " Fuzzy file finder / map to F
         " Plug 'scrooloose/nerdtree'
-        Plug 'yuttie/comfortable-motion.vim'        " Physic Motion
-        Plug 'vim-scripts/matchit.zip'
-        Plug 'vim-scripts/svn-diff.vim'
+        " Plug 'yuttie/comfortable-motion.vim'        " Physic Motion
+        " Plug 'vim-scripts/matchit.zip'
+        " Plug 'vim-scripts/svn-diff.vim'
         " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
         " Plug 'zchee/deoplete-jedi'
         " Plug 'jiangmiao/auto-pairs'
         " Plug 'machakann/vim-highlightedyank'
-        Plug 'MattesGroeger/vim-bookmarks'          " https://vimawesome.com/plugin/vim-bookmarks
-        Plug 'tpope/vim-vinegar'
-        Plug 'honza/vim-snippets'
-        Plug 'beloglazov/vim-online-thesaurus'
-        Plug 'mhinz/vim-startify'
-        Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-        Plug 'junegunn/goyo.vim'        " just text
-        Plug 'junegunn/limelight.vim'   " only highlight focus
-        Plug 'tpope/vim-sensible'
-        Plug 'rking/ag.vim'
-        Plug 'tpope/vim-surround'
-        Plug 'scrooloose/syntastic'
-        Plug 'tpope/vim-repeat'
-        Plug 'jceb/vim-orgmode'
-        Plug 'reedes/vim-pencil'
-        Plug 'terryma/vim-smooth-scroll'
-        Plug 'fudesign2008/websearch.vim'
-        Plug 'morhetz/gruvbox'
+        " Plug 'MattesGroeger/vim-bookmarks'          " https://vimawesome.com/plugin/vim-bookmarks
+        " Plug 'tpope/vim-vinegar'
+        " Plug 'honza/vim-snippets'
+        " Plug 'beloglazov/vim-online-thesaurus'
+        " Plug 'mhinz/vim-startify'
+        " Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+        " Plug 'junegunn/goyo.vim'        " just text
+        " Plug 'junegunn/limelight.vim'   " only highlight focus
+        " Plug 'tpope/vim-sensible'
+        " Plug 'rking/ag.vim'
+        " Plug 'tpope/vim-surround'
+        " Plug 'scrooloose/syntastic'
+        " Plug 'tpope/vim-repeat'
+        " Plug 'jceb/vim-orgmode'
+        " Plug 'reedes/vim-pencil'
+        " Plug 'terryma/vim-smooth-scroll'
+        " Plug 'fudesign2008/websearch.vim'
+        " Plug 'morhetz/gruvbox'
         " Plug 'neoclide/coc.nvim'     " new completion
-        Plug 'vim-scripts/AutoComplPop'  " https://www.youtube.com/watch?v=2f8h45YR494
+    endif
     call plug#end()
-endif
-
-if hostname == "vivobook"
-    " source ~//nvim/hyper.vim   " Light vim color theme
-    " colorscheme edar
-    colorscheme default
-    colorscheme gruvbox
-    hi ActiveWindow            guibg=black    ctermbg=white
-    hi InactiveWindow          guibg=Grey13   ctermbg=grey
-    hi Visual                  guibg=Grey30   guifg=clear
-    hi Folded                  ctermfg=gray   ctermbg=NONE guibg=gray15
-    echom "hostname: " . hostname
 endif
 
 " airline settings
@@ -1045,7 +1087,9 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 
 let g:deoplete#enable_at_startup = 1
 hi HighlightedyankRegion cterm=reverse gui=reverse
-map          <Space><Space>         <Plug>(easymotion-overwin-f)
+"nnoremap     <Space><Space>  :call QuaterCenter()<CR>
+nnoremap     <Enter>         :call QuaterCenter()<CR>
+nnoremap     s1              <Plug>(easymotion-overwin-f)
 nnoremap     <Space>C        :let g:screen_offset=!g:screen_offset<CR>:echo "g:screen_offset: " . string(g:screen_offset)<CR>
 nnoremap     <Space>ZZ       :Goyo <bar> Goyo 100%x100% <bar> let g:zen_mode=!g:zen_mode <bar> call GuiWindowFullScreen(1) <bar> echom "g:zen_mode: " . g:zen_mode<CR>
 nnoremap     <Space>ZX       :Goyo <bar> echom "g:zen_mode: " . g:zen_mode<CR>
@@ -1055,10 +1099,12 @@ nnoremap     <Space>N        :set nonumber!<CR>
 nnoremap     <Space>S        :let g:smooth_scroll=!g:smooth_scroll<CR>:echo "g:smooth_scroll: " . g:smooth_scroll<CR>
 nnoremap     <Space>W        :set nowrap!<CR>
 
-map          <Space>         <Plug>(easymotion-bd-f2)
-map          <BS>            :<Up><Cr>
+map          <Space>         <Plug>(easymotion-overwin-f2)
+vnoremap     <Space>         <Plug>(easymotion-overwin-f2)
 
-map          vai             vaI
+" map          <BS>            :<Up><Cr>
+
+" map          vai         vaI
 
 " nnoremap <silent> <C-f> :call comfortable_motion#flick(200)<cr>
 " nnoremap <silent> <C-b> :call comfortable_motion#flick(-200)<cr>
@@ -1095,26 +1141,45 @@ imap <C-l> <Plug>(coc-snippets-expand)
 "         returns the cursor position.  Differs from '< in    
 "         that it's updated right away.
 
-nnoremap <silent> gly :silent !start bin\\kitty_portable -ssh root@ly95843.ddns.net<cr>
-nnoremap <silent> gv  :silent !start bin\\kitty_portable -ssh root@rvl-pv-ply-ub1804vm.rvl.mscc.lab<cr>
-nnoremap <silent> gs  :silent !start /max c:\\Progra~1\\Git\\git-bash.exe<cr>
-nnoremap  gq      q
-nnoremap ,of          :%s//'/g
-nnoremap ,oc          :r !python \%userprofile\%\\df\\ocr.py<CR>:%s//'/g<CR>
+" nnoremap ,oc          :r !python \%userprofile\%\\df\\ocr.py<CR>:%s//'/g<CR>
 
-augroup CursorLine
+nnoremap          gq  q
+nnoremap          ,of :%s//'/g
+execute "nnoremap          ,oc :r !python \%userprofile\%\\" . g:dotfile . "\\ocr.py<CR>:%s//'/g<CR>"
+
+augroup CursorLine  " only show on ActiveWindow
   au!
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   au WinLeave * setlocal nocursorline
 augroup END
 
-hi ActiveWindow            guibg=black     ctermbg=white
-hi InactiveWindow          guibg=gray9     ctermbg=grey
+colorscheme gruvbox
+
+hi Visual                  cterm=bold     ctermfg=white   guibg=red   gui=reverse     guifg=darkred guibg=white
+hi ActiveWindow            guibg=black    ctermbg=black
+hi InactiveWindow          guibg=gray9    ctermbg=233       " dark gray starts at 232,
+hi Folded                  ctermfg=250    ctermbg=17                guifg=gray     guibg=darkblue
+hi Search                  cterm=bold     ctermfg=black   ctermbg=yellow " gui=reverse guifg=#fabd2f guibg=#282828
+
+hi DiffAdd      ctermfg=darkgreen     ctermbg=black  guifg=darkgreen    guibg=gray80
+hi DiffChange   ctermfg=darkyellow    ctermbg=white  guifg=darkorange4  guibg=gray80
+hi DiffDelete   ctermfg=darkred       ctermbg=233    guifg=darkred      guibg=black
+hi DiffText     ctermfg=yellow        ctermbg=black  guifg=yellow3      guibg=black
+
+hi jsonCommentError guifg=#928374 guibg=black
+hi airline_tabsel   guibg=blue guifg=white ctermfg=white ctermbg=darkblue
+
+" for finding right color #
+" nnoremap gis <C-a>:w<CR>:so %<CR>
+" nnoremap gds <C-x>:w<CR>:so %<CR>
 
 " asus monitor
-nnoremap sba       :hi InactiveWindow          guibg=gray9     ctermbg=grey<CR>
+nnoremap sba       :hi InactiveWindow          guibg=gray9     ctermbg=233<CR>
 " dell 7400 laptop screen
-nnoremap sbd       :hi InactiveWindow          guibg=gray12    ctermbg=grey<CR>
+nnoremap sbd       :hi InactiveWindow          guibg=gray12    ctermbg=235<CR>
+
+nnoremap dK        md<Up>dd`d
+nnoremap dJ        md<Down>dd`d
 
 " function! SetDiffEnviron()
 "   set diff
@@ -1126,13 +1191,9 @@ nnoremap sbd       :hi InactiveWindow          guibg=gray12    ctermbg=grey<CR>
 " :command! SetDiffEnviron call SetDiffEnviron()
 
 " if &diff
-"     colorscheme gruvbox
+"     1colorscheme gruvbox
 " endif
 
-hi DiffAdd      ctermfg=NONE          ctermbg=Green  guifg=darkgreen    guibg=gray80
-hi DiffChange   ctermfg=NONE          ctermbg=NONE   guifg=darkorange4  guibg=gray80
-hi DiffDelete   ctermfg=LightBlue     ctermbg=Red    guifg=darkred       guibg=black
-hi DiffText     ctermfg=Yellow        ctermbg=Red    guifg=yellow3      guibg=black
 " augroup BgHighlight
 "     autocmd!
 "     autocmd WinEnter * hi normal guibg=black
@@ -1144,14 +1205,13 @@ hi DiffText     ctermfg=Yellow        ctermbg=Red    guifg=yellow3      guibg=bl
 " endfunc
 " let timer = timer_start(120000, 'MyHandler', {'repeat': -1})
 
-
-" Test area:
-   "in quotes"
-   " (in side paranes)  
-   " [this is a test]
-   " {this is a test}
-   " <arrows string>
-" paranthasess 1st 2nd 3rd 
+" Test area: new
+"in quotes"
+" (in side paranes)  
+" [this is a new test]
+" {this is a test}
+" <arrows string>
+" paranthasess 1st 2nd 3rd 4th
 " This is a line of text. A second text line. Make this the third sentence. 
 " http://news.com
-" ~/fdf/vimrc - END
+" ~/df/vimrc - END

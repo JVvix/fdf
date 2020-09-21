@@ -48,19 +48,19 @@ inoremap  `" "
 inoremap  `( (
 inoremap  UU <left><C-o>gUiw<C-o>e<right>
 
-" type :PlugInstall to install plugins
-call plug#begin('~/dotfiles/plugged')
-Plug 'scrooloose/nerdcommenter'
-Plug 'easymotion/vim-easymotion'
-Plug 'valloric/youcompleteme'
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-surround'
-Plug 'michaeljsmith/vim-indent-object'
-Plug 'tpope/vim-repeat'
-Plug 'vim-airline/vim-airline'
-Plug 'nanotech/jellybeans.vim'
-Plug 'vim-airline/vim-airline'
-call plug#end()
+" " type :PlugInstall to install plugins
+" call plug#begin('~/fdf/plugged')
+" Plug 'scrooloose/nerdcommenter'
+" Plug 'easymotion/vim-easymotion'
+" Plug 'valloric/youcompleteme'
+" Plug 'scrooloose/syntastic'
+" Plug 'tpope/vim-surround'
+" Plug 'michaeljsmith/vim-indent-object'
+" Plug 'tpope/vim-repeat'
+" Plug 'vim-airline/vim-airline'
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'vim-airline/vim-airline'
+" call plug#end()
 
 " map       <Space>         <Plug>(easymotion-overwin-f)
 

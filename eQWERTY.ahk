@@ -565,6 +565,7 @@ RALT & LALT::Send ^{Backspace}
 
     ; test lalt
     lalt::Send {Escape}
+    ;lctrl::Send {Escape}
     ralt & z::Send !{F4}
     ;lalt::Send {Enter}
     lalt & backspace::sendraw \=
@@ -587,13 +588,15 @@ RALT & LALT::Send ^{Backspace}
     RALT & '::Send {Right}
     RALT & ,::Send {Home} 
     RALT & RSHIFT::Send {End}
-    RALT & Space::Send {BackSpace}
+    ; RALT & Space::Send {BackSpace}
+    RALT & Space::msgbox RALT is backspace
+    RALT::Send {BackSpace}
     RALT & [::Send {PgUp}
     RALT & p::Send {PgDn}
     ;RALT & ]::RunOrActivate(kittyPath)
     RALT & r::RunOrActivate(kittyPath)  ; alt-t (terminal)
     RALT & t::RunOrActivate(timerPath)  ; alt-t (terminal)
-    RALT & Esc::RunOrActivate("shutdown /l")  ; alt-t (terminal)
+    +Esc::RunOrActivate("shutdown /l")  ; alt-t (terminal)
     RALT & `::sendraw `
     RALT & c::RunOrActivate(nvimqtPath) ; alt-v (vim)
     1    & k::RunOrActivate(connectifyPath) ; alt-h hotspot

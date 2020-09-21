@@ -2,7 +2,11 @@
 " NOTE: Vim fold commands: zr - unfold / zm - fold
 
 " let/set {{{
-let g:dotfile = "fdf"         " location of dotfile folder from home folder 
+if isdirectory($HOME."/fdf")
+    let g:dotfile = "fdf"
+else
+    let g:dotfile = "df"
+endif
 execute "let g:plug_vim_path=\"~/" . g:dotfile . "/nvim/plug.vim\""
 execute "let g:plug_vim_dir_path=\"~/" . g:dotfile . "/nvim/plugged\""
 let g:plug_vim_nvm_path="/mnt/nvm/users/ply/df/nvim/plug.vim"
@@ -40,10 +44,22 @@ let g:screen_offset = 1.0/4.0 " 25%
 " let g:screen_offset = 0
 
 if has('win32') || has('win64')
-    let g:python3_host_prog = 'C:\Program Files\Python38\python.exe'
+    " let g:python3_host_prog = 'C:\Program Files\Python38\python.exe'
 else
     let g:python3_host_prog = '/usr/bin/python3'
 endif
+
+" let g:coc_common = { "suggest.noselect": false  }
+
+" " explorer.vim
+" let g:coc_explorer = {
+"       \   "explorer.icon.enableNerdfont": v:true,
+"       \   "explorer.keyMappings": {
+"       \     "<space>": "normal:j"
+"       \   },
+"       \ }
+
+" let g:coc_user_config = extend(g:coc_common, g:coc_explorer)
 
 set autochdir  " auto change directory to current file
 set cindent
@@ -133,8 +149,8 @@ execute "nnoremap <leader>l   :source ~/" . g:dotfile . "/nvim/session.vim<cr>"
 nnoremap <leader>m   :marks<cr>
 nnoremap <leader>pi  :PlugInstall<cr>
 nnoremap <leader>q   :quit!<cr>
-execute "nnoremap <leader>ef  :edit ~/" . g:dotfile "/fayevimrc<cr>"
-execute "nnoremap <leader>sf  :source ~/" . g:dotfile "/fayevimrc<cr>"
+execute "nnoremap <leader>ef  :edit ~/" . g:dotfile . "/fayevimrc<cr>"
+execute "nnoremap <leader>sf  :source ~/" . g:dotfile . "/fayevimrc<cr>"
 nnoremap <leader>st  vip:sort<cr>
 execute "nnoremap <leader>sv  :source ~/" . g:dotfile . "/vimrc<cr>"
 execute "nnoremap <leader>sg  :source ~/" . g:dotfile . "/nvim/ginit.vim<cr>"
@@ -154,13 +170,18 @@ nnoremap <A-v>       :normal "+P<cr>
 nnoremap <leader>y   :normal gg"+yG
 nnoremap <leader>s   :%s/\<<C-r><C-w>\>//g<Left><Left>
 
+" asus monitor
+nnoremap ,iwa       :hi InactiveWindow          guibg=gray9     ctermbg=233<CR>
+" dell 7400 laptop screen
+nnoremap ,iwd      :hi InactiveWindow          guibg=gray12    ctermbg=235<CR>
+
 " Center search results
-let g:line=2
 " nnoremap n :execute "normal nzt" . g:line . "\<Down>\<CR>"
 " nnoremap n :execute "normal nzt"
-"
-nnoremap <c-i> <c-o>
+
+nnoremap <c-i> <c-o>    " swap i/o so it's more intuative (left back/right forward
 nnoremap <c-o> <c-i>
+
 " nnoremap n nzz7<C-e>
 " nnoremap N Nzz7<C-e>
 nnoremap * *zz7<C-e>
@@ -179,6 +200,81 @@ nnoremap <expr> <leader>st &showtabline ? ":set showtabline=0\<cr>" : ":set show
 
 " g mappings {{{
 " change inside the followings: ([{"'
+"xml mapping
+" Edit text in <Tag> in a vsplit buffer (asumed right)
+" transfer <Tag> Buffer back to xml buffer (assumed left)
+nnoremap   get         vity:vsplit tag.java<cr>P:echo "Type 'gtt' to transfer text back to xml/html"<cr>
+nnoremap   gtt         mTggvG$hy:quit!<cr><C-W>hvitp
+
+" CD location
+nnoremap   gbr         :cd C:\sandbox\mtc\ExecutorSuites\SystemValidation\Dual Port Backup Restore<cr>:edit!.<cr>
+nnoremap   g.          :edit! .<cr>
+
+" copy and paste at local location
+" nnoremap     <leader>v       my:echo "highlight text, then press 'v' to paste at this location."<cr>
+" vnoremap   v            y`YP
+vnoremap   yy           Y
+
+" swap ; with :
+nnoremap   :            ;
+nnoremap   ;            :
+vnoremap   :            ;
+vnoremap   ;            :
+
+" A mappings
+nnoremap   A            <Nop>
+nnoremap   AA           A
+
+" C mappings            " C is same as c$
+nnoremap   C            <Nop>
+nnoremap   CC           C
+" nnoremap   Ct           :silent !start \%userprofile\%\\df\\bin\\ctags.exe -V -f \%userprofile\%\\df\tags --language-force=java -R C:\sandbox
+nnoremap   Ct           :silent !start \%userprofile\%\\df\\bin\\ctags.exe -V -f \%userprofile\%\\df\tags -R C:\sandbox<cr>
+
+" D mappings
+nnoremap   D            <Nop>
+nnoremap   DD           D
+if has('win32') || has('win64')
+    nnoremap   DF       :!del %<CR>
+else
+    nnoremap   DF       :!rm %<CR>
+endif
+
+nnoremap   DB           :bdelete!<CR>
+nnoremap   DA           :%d_<CR>
+
+" F mappings
+nnoremap   F            <Nop>
+nnoremap   f            <Nop>
+nnoremap   fl           f
+nnoremap   fh           F
+nnoremap   ff           ;
+nnoremap   FC           :CocCommand explorer<CR>
+" nnoremap   <C-f>        :CocCommand explorer<CR>
+nnoremap   <C-f>        :Fern . -drawer -toggle<CR>
+nnoremap   FE.          :Fern . -drawer -toggle<CR>
+execute "nnoremap   FEd          :Fern ~/" . g:dotfile . "<CR>"
+nnoremap   FED          :Fern ~/Downloads<CR>
+nnoremap   FEh          :Fern ~<CR>
+nnoremap   FEr          :Fern c:\<CR>
+nnoremap   FEs          :Fern c:\Sandbox<CR>
+nnoremap   FB           :Buffers<CR>
+nnoremap   Fl           :BLines<CR>
+nnoremap   FF           :Files<Space>
+nnoremap   FF.          :Files .<CR>
+nnoremap   FFr          :Files c:\<CR>
+nnoremap   FFs          :Files c:\Sandbox<CR>
+nnoremap   FFh          :Files ~<CR>
+nnoremap   FG           :GFiles<Space>
+nnoremap   FG.          :GFiles .<CR>
+nnoremap   FT           :NERDTree<CR>
+execute "nnoremap   FGd          :GFiles ~/" . g:dotfile . "<CR>"
+nnoremap   FGh          :GFiles ~<CR>
+nnoremap   FGs          :GFiles c:\Sandbox<CR>
+
+nnoremap   FS	        :let g:full_screen=!g:full_screen <bar> call GuiWindowFullScreen(g:full_screen) <bar> echom "fullscreen toggled"<CR> 
+
+" G & g mappings
 nnoremap   g=          :<C-r>=
 nnoremap   g,	       /><CR>ci<
 nnoremap   g0	       /)<CR>ci(
@@ -209,67 +305,6 @@ nnoremap   gS          :Startify<cr>
 nnoremap   gt          <C-]>ww
 nnoremap   g{	       /}<CR>ci{
 
-"xml mapping
-" Edit text in <Tag> in a vsplit buffer (asumed right)
-" transfer <Tag> Buffer back to xml buffer (assumed left)
-nnoremap   get         vity:vsplit tag.java<cr>P:echo "Type 'gtt' to transfer text back to xml/html"<cr>
-nnoremap   gtt         mTggvG$hy:quit!<cr><C-W>hvitp
-
-" CD location
-nnoremap   gbr         :cd C:\sandbox\mtc\ExecutorSuites\SystemValidation\Dual Port Backup Restore<cr>:edit!.<cr>
-nnoremap   g.          :edit! .<cr>
-
-" copy and paste at local location
-" nnoremap     <leader>v       my:echo "highlight text, then press 'v' to paste at this location."<cr>
-" vnoremap   v            y`YP
-vnoremap   yy           Y
-
-" swap ; with :
-nnoremap   :            ;
-nnoremap   ;            :
-vnoremap   :            ;
-vnoremap   ;            :
-
-" A mappings
-nnoremap   A            <Nop>
-nnoremap   AA           A
-
-" D mappings
-nnoremap   D            <Nop>
-nnoremap   DD           D
-nnoremap   Db           :bdelete!<CR>
-nnoremap   dB           :bdelete!<CR>
-nnoremap   Da           :%d_<CR>
-nnoremap   dA           :%d_<CR>
-
-" F mappings
-nnoremap   F            <Nop>
-nnoremap   f            <Nop>
-nnoremap   fl           f
-nnoremap   fh           F
-nnoremap   ff           ;
-nnoremap   FE.          :Fern .<CR>
-nnoremap   FE           :Fern 
-execute "nnoremap   FEd          :Fern ~/" . g:dotfile . "<CR>"
-nnoremap   FED          :Fern ~/Downloads<CR>
-nnoremap   FEh          :Fern ~<CR>
-nnoremap   FEr          :Fern c:\<CR>
-nnoremap   FEs          :Fern c:\Sandbox<CR>
-nnoremap   FB           :Buffers<CR>
-nnoremap   FF           :Files<Space>
-nnoremap   FF.          :Files .<CR>
-nnoremap   FFr          :Files c:\<CR>
-nnoremap   FFs          :Files c:\Sandbox<CR>
-nnoremap   FFh          :Files ~<CR>
-nnoremap   FG           :GFiles<Space>
-nnoremap   FG.          :GFiles .<CR>
-execute "nnoremap   FGd          :GFiles ~/" . g:dotfile . "<CR>"
-nnoremap   FGh          :GFiles ~<CR>
-nnoremap   FGs          :GFiles c:\Sandbox<CR>
-
-nnoremap   FS	        :let g:full_screen=!g:full_screen <bar> call GuiWindowFullScreen(g:full_screen) <bar> echom "fullscreen toggled"<CR> 
-
-" G mappings
 nnoremap   G            <Nop>
 nnoremap   GG          G
 nnoremap   Gg	       :G log<cr>
@@ -287,12 +322,12 @@ nnoremap   Gl          :Dispatch! git pull<cr>
 nnoremap   gy          :Goyo 100%<cr>
 nnoremap   g)          }k
 
-nnoremap   gb          :buffer! #<cr>
 " nnoremap   gbh         :bp<cr>
 " nnoremap   gbl         :bn<cr>
 " nnoremap   gbd         :bd<cr>
 nnoremap   Gr          :Grep \<<C-r><C-w>\><CR>
 nnoremap   Gs	       :Gstatus<cr>
+
 map        Gj          <Plug>(GitGutterNextHunk)zz
 map        Gk          <Plug>(GitGutterPrevHunk)zz
 
@@ -307,24 +342,38 @@ nnoremap   Ms           m
 nnoremap   m            `
 nnoremap   `            m"
 
+" q mappings
+nnoremap   Q            <Nop>
+nnoremap   QQ 	        :quit!<cr>
+nnoremap   QA 	        :qall!<cr>
+" nnoremap   qq           echo "macro"
+nnoremap   q            :call QuitIfNotLastWindow()<cr>
+
 " s mappings
 map        s2           <Plug>(easymotion-overwin-f2)
 inoremap   <C-e>        <C-o>:<Plug>(easymotion-overwin-f2)<CR>
 nnoremap   S            <Nop>
 nnoremap   SF           :Startify<cr>
+nnoremap   s1           :!
 nnoremap   SS           S
-nnoremap   SW           :w<cr>:source %<cr>
+"nnoremap   SW           :w<cr>:source %<cr>
+nnoremap   <C-s>        :w<cr>:source %<cr>
 if has('win32') || has('win64')
     " cmdkey /generic:TERMSRV/10.182.66.54 /user:connvm06 /pass:nvm*
     " mstsc /v:10.182.66.54 /w:1200 /h:800 /user:connvm06
-    nnoremap <silent> S3    :silent !start mstsc /v:10.182.64.45 /w:1280 /h:720<cr>
+    nnoremap <silent> S3c   :silent !start mstsc             /v:10.182.64.45 /w:1280 /h:720<cr>
+    nnoremap <silent> S3p   :silent !start mstsc /prompt     /v:10.182.64.45 /w:320  /h:640<cr>
     nnoremap <silent> S6    :silent !start mstsc /v:10.182.66.54 /w:1280 /h:720<cr>
     nnoremap <silent> S9    :silent !start \%userprofile\%\\df\\bin\\kitty_portable -ssh root@ly95843.ddns.net<cr>
-    nnoremap <silent> Sv    :silent !start \%userprofile\%\\df\\bin\\kitty_portable  -pw aa -ssh root@rvl-pv-ply-ub1804vm.rvl.mscc.lab<cr>
-    nnoremap <silent> Sl    :silent !start \%userprofile\%\\df\\\\bin\\kitty_portable -pw aa -ssh ply@localhost<cr>
+    nnoremap <silent> Sa    :silent !start \%userprofile\%\\df\\bin\\AutoHotkey "%"<cr>
     nnoremap <silent> Sb    :silent !start /max c:\\Progra~1\\Git\\git-bash.exe<cr>
+    nnoremap <silent> Sd    :silent !start \%userprofile\%\\df\\bin\\Dimmer.exe<cr>
+    nnoremap <silent> Slh   :silent !start \%userprofile\%\\df\\bin\\kitty_portable -pw aa -ssh ply@localhost<cr>
+    nnoremap <silent> Svh   :silent !start \%userprofile\%\\df\\bin\\kitty_portable  -pw aa -ssh root@rvl-pv-ply-ub1804vm.rvl.mscc.lab<cr>
+    nnoremap <silent> Svp   :silent !start \%userprofile\%\\df\\bin\\kitty_portable  -pw aa -ssh root@ub2004-pve<cr>
+    nnoremap <silent> Sy    :silent !start http://youtube.com<cr>
 else
-    " inside MS WSL
+    " Not running if rom window / these mappings are ment to be run inside WSL
     nnoremap <silent> S3    :silent !/mnt/c/Windows/System32/mstsc.exe /v:10.182.64.45 /w:1280 /h:720 &<cr>
     nnoremap <silent> S6    :silent !/mnt/c/Windows/System32/mstsc.exe /v:10.182.66.54 /w:1280 /h:720 &<cr>
     nnoremap <silent> S9    :silent !/mnt/c/Users/C50626/df/bin/kitty_portable.exe -ssh root@ly95843.ddns.net &<cr>
@@ -332,6 +381,7 @@ else
     nnoremap <silent> Sl    :silent !/mnt/c/Users/C50626/df/bin/kitty_portable.exe -pw aa -ssh ply@localhost &<cr>
     nnoremap <silent> Sb    :silent !start /max c:\\Progra~1\\Git\\git-bash.exe<cr>
 endif
+nnoremap <silent> Slg   :tabnew<cr>:set nonumber<cr>:terminal lazygit<cr>i
 nnoremap   s            <Nop>
 nnoremap   s=           <C-w>=
 nnoremap   sH 	        :vertical resize -5<cr>
@@ -342,6 +392,7 @@ nnoremap   sN           :new<cr>
 nnoremap   sS           :split<cr>
 nnoremap   sb           ?
 nnoremap   sB           ?BM<CR>
+nnoremap   sbd          :bdelete!<cr>
 nnoremap   sdg          :diffget<CR>
 vnoremap   sdg          :diffget<CR>
 nnoremap   sdk          [czz
@@ -351,6 +402,7 @@ nnoremap   sdp          :diffput<CR>
 vnoremap   sdp          :diffput<CR>
 nnoremap   sdt          :diffthis<CR>
 nnoremap   sdu          :diffupdate<CR>
+nnoremap   sdw          :windo diffthis<CR>
 nnoremap   sf           /
 nnoremap   sh           <C-w>h
 nnoremap   sj           <C-w>j
@@ -360,10 +412,15 @@ nnoremap   sn           :vnew<cr>
 nnoremap   so           <C-w>o
 nnoremap   sq           :call QuitIfNotLastWindow()<cr>
 nnoremap   ss           :vsplit<cr>
+nnoremap   stl          :tabn<cr>
+nnoremap   sth          :tabp<cr>
 if has('win32') || has('win64')
-    nnoremap   st           :vsplit<cr>:set nonumber<cr>:terminal powershell<cr>i
+    nnoremap   stp           :vsplit<cr>:set nonumber<cr>:terminal powershell<cr>i
+    nnoremap   stc           :vsplit<cr>:set nonumber<cr>:terminal cmd<cr>i
 else
-    nnoremap   st           :vsplit<cr>:set nonumber<cr>:terminal bash<cr>i
+    nnoremap   stb           :vsplit<cr>:set nonumber<cr>:terminal bash<cr>i
+    nnoremap   stf           :vsplit<cr>:set nonumber<cr>:terminal fish<cr>i
+    nnoremap   stz           :vsplit<cr>:set nonumber<cr>:terminal zsh<cr>i
 endif
 nnoremap   sr           :%s/\<<C-r><C-w>\>/<C-r><C-w>/g<Left><Left>
 nnoremap   svn          :new<cr>
@@ -484,8 +541,8 @@ nnoremap <A-=>      gg=G<C-o><C-o>
 " mappying to copy text to current cursor location
 " nnoremap <A-i>      :tabp<cr>
 " nnoremap <A-o>      :tabn<cr>
-nnoremap <M-i>      <C-o>zz
-nnoremap <M-o>      <C-i>zz
+nnoremap <A-i>      <C-o>zz
+nnoremap <A-o>      <C-i>zz
 nnoremap <A-c>      :tabe<cr>
 nnoremap <A-9>      :tabp<cr>
 nnoremap <A-0>      :tabn<cr>
@@ -496,9 +553,13 @@ nnoremap <A-4>      4gT
 nnoremap <A-5>      5gT
 
 " Re-run command on right split. Switch windows and press {UP} {Enter}, then switch back
+
 inoremap <M-r>                <Esc>:w<cr><C-w>li<Up><cr><c-\><C-n><C-w>ha
 nnoremap <M-r>                <Esc>:w<cr><C-w>li<Up><cr><c-\><C-n><C-w>h
 nnoremap gr                   <Esc>:w<cr><C-w>li<Up><cr><c-\><C-n><C-w>h
+
+inoremap <M-w>                <Esc>:w<cr>
+nnoremap <M-w>                <Esc>:w<cr>
 
 "}}}
 
@@ -513,12 +574,11 @@ nnoremap gr                   <Esc>:w<cr><C-w>li<Up><cr><c-\><C-n><C-w>h
 " nnoremap   <silent> K                  :call UpperK()<CR>
 "nnoremap   K                 
 "nnoremap   M                  :call cursor(0, len(getline('.'))/2)<cr>
-nnoremap   Q 	              :quit!<cr>
 nnoremap   cw	              ciw
+nnoremap   dw	              diw
 " nnoremap   gp	              <C-o>]p
 " nnoremap   gp                 :vsplit<cr>:set nonumber<cr>:terminal powershell -executionpolicy bypass<cr>i
 nnoremap   gu                 :vsplit<cr>:set nonumber<cr>:terminal ubuntu1804<cr>i
-nnoremap   q 	              :call QuitIfNotLastWindow()<cr>
 
 " nnoremap   j                  :call PageDown()<cr>
 " nnoremap   k                  :call PageUp()<cr>
@@ -573,14 +633,19 @@ let s:NavigateLeftHanded = 0
 function! NavigateLeftHanded()
     if s:NavigateLeftHanded == 0
         let s:NavigateLeftHanded = 1
-        nnoremap   d                  <nop>
-        nnoremap   d                  ma<C-f><C-e><C-e>
-        nnoremap   e                  ma<C-b><C-y><C-y>
-        echom "NavLeftMode: d->Page down e->Page up, type 'ged' to revert"
+        echom "NavLeftMode: on, type 'ged' to deactivate"
+        unmap      dw
+        unmap      dJ
+        unmap      dK
+        nnoremap   e                  :call PageUp()<cr>
+        nnoremap   d                  :call PageDown()<cr>
     else
         let s:NavigateLeftHanded = 0
         unmap      d
         unmap      e
+        nnoremap   dw	              diw
+        nnoremap   dK        md<Up>dd`d
+        nnoremap   dJ        mDown>dd`d
         echom "NavLeftMode: off, type 'ged' to activate"
     endif
 endfunction
@@ -774,7 +839,7 @@ function! QuitIfNotLastWindow()
         execute ":q!"
         echo "Window closed with 'q'."
     else
-        echo "NOTE: last window, use 'Q' to quit."
+        echo "NOTE: last window, use 'QQ' to quit."
     endif
 endfunction
 
@@ -855,7 +920,8 @@ autocmd BufEnter *.bsh :set filetype=java
 autocmd BufEnter *.bsh :set ff=dos
 autocmd VimLeave * call SaveSess()
 autocmd BufEnter term://* startinsert
-autocmd FileType java set tags=~/df/tags.java
+" autocmd BufEnter * call ncm2#enable_for_buffer()
+autocmd FileType java set tags=~/df/tags
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 " autocmd VimEnter * call RestoreSess()
@@ -899,9 +965,6 @@ if hostname == "CAR-LT-C50627"  " Work Setup. configured to be in light mode, th
     hi ActiveWindow            guibg=white     ctermbg=white
     hi InactiveWindow          guibg=lightgray ctermbg=grey
 
-    " hi EasyMotionTarget2First  cterm=bold      ctermfg=40     gui=bold guifg=green
-    " hi EasyMotionTarget2Second cterm=bold      ctermfg=40     gui=bold guifg=green
-    " hi EasyMotionTarget        ctermbg=none    ctermfg=green  gui=bold guifg=purple
     hi Folded                  ctermbg=darkyellow   guifg=clear    guibg=#dddddd
     hi ActiveWindow            guibg=black    ctermbg=white
     hi InactiveWindow          guibg=gray205  ctermbg=grey
@@ -913,51 +976,6 @@ if hostname == "CAR-LT-C50627"  " Work Setup. configured to be in light mode, th
     " hi StatusLine       ctermbg=none ctermfg=green   gui=bold guifg=purple
     " hi EasyMotionShade  ctermbg=none ctermfg=blue    gui=bold guifg=purple
     " nnoremap <leader>ct  !%:p:h/nvim/session.vim//bin/ctags -V -f tags --language-force=java -R C:\sandbox\MTR\Libraries\*.bsh<cr>
-    nnoremap <leader>ct  :silent !c:\Users\C50626\\bin\ctags -V -f tags --language-force=java -R C:\sandbox\MTR\Libraries\*.bsh<cr>
-
-    source ~/df/nvim/plug.vim    " call directly instead of using "autoload" directory
-    "echo "759 Plug.vim: loading for host " . hostname
-    call plug#begin('~/df/nvim/plugged')
-    Plug 'bling/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-    Plug 'easymotion/vim-easymotion'
-    Plug 'michaeljsmith/vim-indent-object'      " https://github.com/michaeljsmith/vim-indent-object
-    Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-fugitive'
-    Plug 'ryanoasis/vim-devicons'
-    Plug 'kien/ctrlp.vim'                       " Fuzzy file finder / map to F
-    Plug 'airblade/vim-gitgutter'
-    " Plug 'yuttie/comfortable-motion.vim'        " Physic Motion
-    Plug 'terryma/vim-smooth-scroll'
-    Plug 'vim-scripts/matchit.zip'
-    Plug 'vim-scripts/svn-diff.vim'
-    " Plug 'machakann/vim-highlightedyank'
-    Plug 'MattesGroeger/vim-bookmarks'          " https://vimawesome.com/plugin/vim-bookmarks
-    Plug 'tpope/vim-vinegar'
-    Plug 'mtdl9/vim-log-highlighting'
-    " Plug 'majutsushi/tagbar'
-    Plug 'craigemery/vim-autotag'
-    Plug 'junegunn/goyo.vim'        " just text
-    Plug 'junegunn/limelight.vim'   " only highlight focus
-    Plug 'kassio/neoterm'
-    " Autocomple Plugins
-    " Plug 'valloric/youcompleteme'
-    " Plug 'neoclide/coc.nvim'     " new completion
-    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " Plug  'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
-    " Plug 'nvim-lua/completion-nvim'
-    " Plug 'neovim/nvim-lsp'
-    Plug 'vim-scripts/AutoComplPop'  " https://www.youtube.com/watch?v=2f8h45YR494
-    " Plug 'reedes/vim-pencil'
-    Plug 'beloglazov/vim-online-thesaurus'
-    Plug 'fudesign2008/websearch.vim'
-    Plug 'morhetz/gruvbox'
-    Plug 'mhinz/vim-startify'
-    "Plug 'vim-scripts/Smooth-Center'
-    "Plug 'drzel/vim-scroll-off-fraction'
-    "Plug 'severin-lemaignan/vim-minimap'
-    call plug#end()
-    "echom "hostname: " . hostname
 
     " ExecutorBuffer Pull/Push
     inoremap <M-r>                <Esc>:call ExecutorBufferPush()<cr>
@@ -983,11 +1001,14 @@ if !exists('g:loaded_plug')  " Only load if it hasn't been loaded.
     if filereadable(expand(g:plug_vim_path))
         execute "source " . g:plug_vim_path
         call plug#begin(g:plug_vim_dir_path)
-    elseif filereadable(g:plug_vim_nvm_path)
-        execute "source " . g:plug_vim_nvm_path"  " for nfs setup alias to v=vim -u /mnt/nvm/users/ply/df/vimrc
-        call plug#begin(g:plug_vim_nvm_dir_path)
+    elseif filereadable('/mnt/nvm/users/ply/df/nvim/plug.vim')
+        source /mnt/nvm/users/ply/df/nvim/plug.vim
+        call plug#begin('/mnt/nvm/users/ply/df/nvim/plugged')
+    elseif filereadable('/nvm/users/ply/df/nvim/plug.vim')  " rvl-pv-vault
+        execute "source /nvm/users/ply/df/nvim/plug.vim"
+        call plug#begin("/nvm/users/ply/df/nvim/plugged")
     endif
-    if hostname == "CAR-LT-C50626"  " Speed issues, limited plugin
+    if hostname == "CAR-LT-C50626"
         " echom "Line 967: inside g:load_plug hostname == CAR-LT-C50626"
         Plug 'easymotion/vim-easymotion'
         Plug 'morhetz/gruvbox'
@@ -995,7 +1016,7 @@ if !exists('g:loaded_plug')  " Only load if it hasn't been loaded.
         Plug 'tpope/vim-commentary'
         Plug 'michaeljsmith/vim-indent-object'      " https://github.com/michaeljsmith/vim-indent-object
         Plug 'airblade/vim-gitgutter'
-        Plug 'vim-scripts/AutoComplPop'  " https://www.youtube.com/watch?v=2f8h45YR494
+        " Plug 'vim-scripts/AutoComplPop'  " https://www.youtube.com/watch?v=2f8h45YR494
         Plug 'tpope/vim-fugitive'
         Plug 'fudesign2008/websearch.vim' " vnoremap gs
         Plug 'mhinz/vim-startify'
@@ -1013,21 +1034,34 @@ if !exists('g:loaded_plug')  " Only load if it hasn't been loaded.
         Plug 'davidhalter/jedi'
         Plug 'SirVer/ultisnips'
         Plug 'scrooloose/nerdtree'
+        " Plug 'neovim/nvim-lspconfig'  " native neovim lsp
+        Plug 'nvim-lua/completion-nvim'  " native neovim lsp
+        Plug 'jremmen/vim-ripgrep'
+        Plug 'osyo-manga/vim-brightest'
+        " Plug 'prabirshrestha/vim-lsp'
+        " Plug 'mattn/vim-lsp-settings'
+        " Plug 'ncm2/ncm2-vim-lsp'
+        " Plug 'ncm2/ncm2'
+        " Plug 'roxma/nvim-yarp'
+
         if has('win32') || has('win64')
+            " Plug 'valloric/youcompleteme'
+            Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        else
             " echom "line 993: non win32platform"
-            " Plug 'neoclide/coc.nvim', {'branch': 'release' }      " stable version
+            Plug 'neoclide/coc.nvim', {'branch': 'release' }      " stable version
         endif
         " Plug 'grvcoelho/vim-javascript-snippets'
         " BM
     else
-        echom "Line 996: outside g:load_plug hostname == CAR-LT-C50626"
+        " echom "Line 996: outside g:load_plug hostname == CAR-LT-C50626"
         Plug 'easymotion/vim-easymotion'
         Plug 'morhetz/gruvbox'
         Plug 'machakann/vim-highlightedyank'
         Plug 'tpope/vim-commentary'
         Plug 'michaeljsmith/vim-indent-object'      " https://github.com/michaeljsmith/vim-indent-object
         Plug 'airblade/vim-gitgutter'
-        Plug 'vim-scripts/AutoComplPop'  " https://www.youtube.com/watch?v=2f8h45YR494
+        " Plug 'vim-scripts/AutoComplPop'  " https://www.youtube.com/watch?v=2f8h45YR494
         Plug 'tpope/vim-fugitive'
         Plug 'mhinz/vim-startify'
         Plug 'tpope/vim-dispatch'
@@ -1089,13 +1123,13 @@ let g:deoplete#enable_at_startup = 1
 hi HighlightedyankRegion cterm=reverse gui=reverse
 "nnoremap     <Space><Space>  :call QuaterCenter()<CR>
 nnoremap     <Enter>         :call QuaterCenter()<CR>
-nnoremap     s1              <Plug>(easymotion-overwin-f)
+" nnoremap     s1              <Plug>(easymotion-overwin-f)
 nnoremap     <Space>C        :let g:screen_offset=!g:screen_offset<CR>:echo "g:screen_offset: " . string(g:screen_offset)<CR>
 nnoremap     <Space>ZZ       :Goyo <bar> Goyo 100%x100% <bar> let g:zen_mode=!g:zen_mode <bar> call GuiWindowFullScreen(1) <bar> echom "g:zen_mode: " . g:zen_mode<CR>
 nnoremap     <Space>ZX       :Goyo <bar> echom "g:zen_mode: " . g:zen_mode<CR>
 nnoremap     <Space>LL       :Limelight!!<CR>
 nnoremap     <Space>Lg       :let g:limelight_conceal_ctermfg="gray"<CR>
-nnoremap     <Space>N        :set nonumber!<CR>
+nnoremap     <Space>N        :set nonmber!<CR>
 nnoremap     <Space>S        :let g:smooth_scroll=!g:smooth_scroll<CR>:echo "g:smooth_scroll: " . g:smooth_scroll<CR>
 nnoremap     <Space>W        :set nowrap!<CR>
 
@@ -1112,10 +1146,6 @@ let g:comfortable_motion_scroll_down_key = "j"
 let g:comfortable_motion_scroll_up_key   = "k"
 
 "}}}
-
-if has('gui_running')
-    echo "has('gui_running')"
-endif
 
 " New things to try
 
@@ -1162,11 +1192,12 @@ hi Folded                  ctermfg=250    ctermbg=17                guifg=gray  
 hi Search                  cterm=bold     ctermfg=black   ctermbg=yellow " gui=reverse guifg=#fabd2f guibg=#282828
 
 hi DiffAdd      ctermfg=darkgreen     ctermbg=black  guifg=darkgreen    guibg=gray80
-hi DiffChange   ctermfg=darkyellow    ctermbg=white  guifg=darkorange4  guibg=gray80
+hi DiffChange   ctermfg=208           ctermbg=black  guifg=darkorange4  guibg=gray80
 hi DiffDelete   ctermfg=darkred       ctermbg=233    guifg=darkred      guibg=black
-hi DiffText     ctermfg=yellow        ctermbg=black  guifg=yellow3      guibg=black
+hi DiffText     ctermfg=darkyellow    ctermbg=black  guifg=yellow3      guibg=black
 
 hi jsonCommentError guifg=#928374 guibg=black
+hi Keyword          ctermfg=green ctermbg=black guibg=clear     guifg=green2
 hi airline_tabsel   guibg=blue guifg=white ctermfg=white ctermbg=darkblue
 
 " for finding right color #
@@ -1180,6 +1211,14 @@ nnoremap sbd       :hi InactiveWindow          guibg=gray12    ctermbg=235<CR>
 
 nnoremap dK        md<Up>dd`d
 nnoremap dJ        md<Down>dd`d
+
+nnoremap <M-h>        :tabp<cr>
+nnoremap <M-l>        :tabn<cr>
+nnoremap dJ        md<Down>dd`d
+
+" lua << EOF
+" require'nvim_lsp'.pyls.setup{}
+" EOF
 
 " function! SetDiffEnviron()
 "   set diff
@@ -1204,6 +1243,42 @@ nnoremap dJ        md<Down>dd`d
 "   silent exec "! cmd /c time /t >> time.out"
 " endfunc
 " let timer = timer_start(120000, 'MyHandler', {'repeat': -1})
+
+func NormalMapping()
+    unmap j
+    unmap k
+    unmap h
+    unmap l
+    " mapclear
+    " nmapclear
+    " vmapclear
+    " xmapclear
+    " smapclear
+    " omapclear
+    " mapclear
+    " imapclear
+    " lmapclear
+    " cmapclear
+    " nnoremap ,sv :source ~/df/vimrc<cr>
+endfunc
+
+let g:gruvbox_contrast_dark = 'hard' 
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" 
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" 
+endif
+let g:gruvbox_invert_selection='0'
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)"colorscheme gruvbox 
+"set background=dark
+
+"set completeopt.menuone,noinsert,noselect
+" let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+
+" lua require'nvim_lsp'.tsserver.setup{ on_attach=require'completion'.on_attach }
 
 " Test area: new
 "in quotes"
